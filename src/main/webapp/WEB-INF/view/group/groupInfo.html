@@ -1,30 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>惠Go</title>
+    <title>[惠Go]团购详情</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
-    <style>
-
-    </style>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/style/groupInfo.css">
 </head>
 <body>
-<div id="app">
-    <row>
-        <i-col>
-            团购活动详情
+<div id="app" v-cloak>
+    <my-header v-on:user-status="getUser"></my-header>
+    <span th:text="${groupId}" ref="groupId" style="display: none"></span>
+
+    <row class="contentRow" justify="center" type="flex">
+        <!--内容主题列,用于居中界面-->
+        <i-col :lg="{span:20,offset:2}" :xs="{span:24}" class="contentCol">
+            <!--图片及简易信息展示部分-->
+            <row class="group-title">
+
+                <i-col :lg="{span:10,offset:1}" :xs="{span:24}">
+                    <!--图片轮播框-->
+                    <carousel :height="380" :autoplay-speed="4000" autoplay>
+                        <carousel-item v-if="imgList.length == 0">
+                            <img :src="goods.picture" style="width: 100%;height: 100%">
+                        </carousel-item>
+                        <carousel-item v-for="img in imgList" :key="img.id">
+                            <img :src="img.saveUrl" style="width: 100%;height: 100%">
+                        </carousel-item>
+                    </carousel>
+                </i-col>
+
+                <!--商品简介及购买界面-->
+                <i-col :lg="{span:11,offset:1}">
+                    <h1>{{goods.name}}</h1>
+                    <p v-if="groupInfo.description!=''" class="group-description">{{groupInfo.description}}</p>
+                    <p class="express">快递配送:&nbsp;<span
+                            style="color: #4050a5">{{express.name}}&nbsp;&nbsp;{{express.price}}元</span>
+                    </p>
+                    <p class="inventory">剩余库存:&nbsp;<span style="color: #4050a5">{{goods.surplusInventory}}</span></p>
+                    <div style="margin-top: 20px;min-height: 20px">
+                        <span class="numberPart">{{groupInfo.numberPart}}&nbsp;
+                            <span style="color: #495060">人已参团</span></span>
+                        <span>最低开团人数:&nbsp;<span style="color: red">{{groupInfo.minParticipants}}</span></span>
+                        <span>最高参与人数:&nbsp;<span style="color: #4050a5">{{groupInfo.maxParticipants}}</span></span>
+                    </div>
+                    <br>
+                    <p class="group-startTime">
+                        <Icon type="ios-clock-outline"></Icon>
+                        开团时间:{{startTime}}
+                    </p>
+                    <br>
+                    <p class="group-startTime" style="color:#8f0000;">
+                        <Icon type="ios-timer-outline"></Icon>
+                        结束时间:{{endTime}}
+                    </p>
+                    <div class="joinBar">
+                        <span class="joinButton" :class="joinButtonStyle" @click="joinBtHandler">
+                            <Icon type="ios-stopwatch-outline" v-if="!groupStatus.start"></Icon>
+                            <Icon type="flag" v-else></Icon>&nbsp;{{joinButtonText}}
+                        </span>
+                        <p class="original-price"><s>¥{{goods.originalprice}}</s></p>
+                        <p class="preferential-price">
+                            ¥{{goods.preferentialprice}}
+                            <Icon type="arrow-graph-down-right"></Icon>
+                        </p>
+                    </div>
+                    <div class="favor-share" style="font-size: 17px;margin-top: 30px;color: #ff9900">
+                        <a @click="addFavorite">
+                            <Icon type="heart"></Icon>
+                            加入收藏</a>
+                        <a style="margin-left: 20px" @click="shareGroup">
+                            <Icon type="share"></Icon>
+                            分享团购</a>
+                    </div>
+
+                </i-col>
+            </row>
+            <!--商品详情及评价页面-->
+            <row class="goodsInfo-evaluate">
+                <i-col :lg="{span:18,offset:3}">
+                    <Tabs value="description">
+                        <tab-pane label="商品详情" name="description">
+                            <textarea readonly="true" class="goods-description">
+                                {{goods.description}}
+                            </textarea>
+                        </tab-pane>
+                        <tab-pane label="商品评价" name="evaluate">
+                            <ul>
+                                <li v-if="evaluates.length == 0">
+                                    <img :src="url.res.EmptyEvaluation" style="margin-top: 10%;margin-left: 8%">
+                                </li>
+                                <li v-for="eval in evaluates" :key="eval.id" class="evaluationLi">
+                                    <span style="margin-left: 10px">
+                                    <img :src="eval.userHeadImg"/>
+                                          <p class="eval-content">{{eval.evaluation.content}}<br><br>
+                                           <Rate disabled :value="eval.evaluation.score"></Rate>
+                                          </p>
+                                    <span style="width: 400px">&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span style="color:blue; text-overflow: ellipsis;overflow: hidden">{{eval.userNickName}}</span>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{dateUtil(eval.evaluation.gmtCreate)}}</span>
+                                    </span>
+                                    </span>
+                                    <hr>
+                                </li>
+                            </ul>
+                        </tab-pane>
+                    </Tabs>
+                </i-col>
+            </row>
 
         </i-col>
     </row>
 
     <my-footer></my-footer>
+    <back-top :right="10" :bottom="20"></back-top>
 </div>
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
 <script type="text/javascript" src="/js/project/webRouter.js"></script>
-<script type="text/javascript" src="/js/project/footer.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script type="text/javascript" src="/js/project/groupInfo.js"></script>
 </body>
 </html>

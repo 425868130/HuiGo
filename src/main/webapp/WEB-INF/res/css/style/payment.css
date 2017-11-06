@@ -1,0 +1,50 @@
+/*订单支付页面样式*/
+
+.contentRow {
+    margin-top: 10px;
+}
+
+/*支付界面*/
+
+.paymentCol {
+    /* background-color: white;*/
+}
+
+.white-row {
+    background-color: white;
+}
+
+.paymentRow * {
+    /*    border: solid 1px red;*/
+}
+
+/*商品详细描述*/
+.goods-simple-desc {
+    color: #bbbec4;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.addressRadio {
+    min-height: 35px;
+}
+
+.addressRadio:hover {
+    background-color: #cedbfe;
+}
+
+.order-commit {
+    min-width: 130px;
+    min-height: 40px;
+    background-color: red;
+    color: white;
+    font-size: 17px;
+    border: none;
+}
+
+.order-commit:hover {
+    cursor: pointer;
+}

@@ -91,6 +91,7 @@ public class UserDaoImpl implements UserDao {
         model.setGmtModified(DateUtil.getCurrentTimestamp());
         model.setGmtCreate(DateUtil.getCurrentTimestamp());
         getSession().save(model);
+        System.out.println("userId" + model.getId());
         return model.getId();
     }
 

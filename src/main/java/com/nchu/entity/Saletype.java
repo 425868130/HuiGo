@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,6 +13,7 @@ import java.sql.Timestamp;
  * 销售类型表实体类
  */
 @Entity
+@Table(name = "saletype")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties(value = {"gmtCreate", "gmtModified"})
@@ -24,19 +22,20 @@ public class Saletype implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    private long id;
+    private Long id;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     private String name;
     private String description;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,24 +82,21 @@ public class Saletype implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Saletype)) return false;
 
         Saletype saletype = (Saletype) o;
 
-        if (id != saletype.id) return false;
+        if (id != null ? !id.equals(saletype.id) : saletype.id != null) return false;
         if (gmtCreate != null ? !gmtCreate.equals(saletype.gmtCreate) : saletype.gmtCreate != null) return false;
         if (gmtModified != null ? !gmtModified.equals(saletype.gmtModified) : saletype.gmtModified != null)
             return false;
         if (name != null ? !name.equals(saletype.name) : saletype.name != null) return false;
-        if (description != null ? !description.equals(saletype.description) : saletype.description != null)
-            return false;
-
-        return true;
+        return description != null ? description.equals(saletype.description) : saletype.description == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
         result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);

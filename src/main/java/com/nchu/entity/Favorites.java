@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  * 收藏表实体
  */
 @Entity
+@Table(name = "favorites")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties({"user", "goods", "gmtCreate", "gmtModified"})
@@ -52,6 +53,7 @@ public class Favorites implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

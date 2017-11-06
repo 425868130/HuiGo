@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>[惠Go]后台管理</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/manager.css">
+</head>
+<body>
+<div id="app" v-cloak>
+
+    <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
+        <!--顶部logo及菜单-->
+        <div class="layout-ceiling">
+            <div style="float: left;margin-left: 20px;color: white">
+                <span style="font-size: 35px">惠Go</span>
+            </div>
+            <div class="layout-ceiling-main" style="color: white">
+                <a :href="url.router.index" style="color: white">
+                    <Icon type="ios-home"></Icon>&nbsp;惠Go首页</a> |
+                <a href="#" style="color: white">
+                    <Icon type="ios-person"></Icon>&nbsp;管理员</a> |
+                <a :href="url.router.logout" style="color: white">
+                    <Icon type="log-out"></Icon>&nbsp;注销</a> |
+            </div>
+        </div>
+        <!--主体内容区-->
+        <Row type="flex">
+            <!--左侧菜单栏-->
+            <i-Col :span="spanLeft" class="layout-menu-left">
+                <i-Menu active-name="1" theme="dark" width="auto">
+                    <!--logo区域-->
+                    <div class="layout-logo-left">
+                        <p style="color: white;text-align: center;">管理系统</p>
+                    </div>
+                    <Submenu name="1">
+                        <span slot="title">
+                            <Icon type="ios-navigate"></Icon>
+                            商家管理
+                        </span>
+                        <menu-item name="1-1"><a :href="url.router.admin.businessAudit" target="contentFrame">商家审核</a>
+                        </menu-item>
+                        <menu-item name="1-2"><a :href="url.router.admin.businessManagement"
+                                                 target="contentFrame">商家账户管理</a>
+                        </menu-item>
+                        <menu-item name="1-3"><a :href="url.router.admin.shopManage" target="contentFrame">店铺管理</a>
+                        </menu-item>
+                    </Submenu>
+                    <Submenu name="3">
+                        <span slot="title">
+                            <Icon type="ios-analytics"></Icon>会员管理
+                        </span>
+                        <menu-item name="3-1"><a :href="url.router.admin.userManagement"
+                                                 target="contentFrame">会员账户管理</a>
+                        </menu-item>
+                    </Submenu>
+                    <Submenu name="4">
+                        <span slot="title">
+                            <Icon type="ios-heart"></Icon>
+                            网站管理
+                        </span>
+                        <menu-item name="4-1"><a :href="url.router.admin.webNotice" target="contentFrame">网站公告</a>
+                        </menu-item>
+                    </Submenu>
+                </i-Menu>
+            </i-Col>
+
+            <!--右侧容器-->
+            <i-Col :span="spanRight">
+                <div class="layout-header">
+                    <i-Button type="text" @click="toggleClick">
+                        <Icon type="navicon" size="32"></Icon>
+                    </i-Button>
+                </div>
+                <!--面包屑导航-->
+                <div class="layout-breadcrumb">
+                    <Breadcrumb>
+                        <Breadcrumb-Item><a :href="url.router.admin.welcome" target="contentFrame">首页</a>
+                        </Breadcrumb-Item>
+                    </Breadcrumb>
+                </div>
+                <!-- TODO 中央内容区-->
+                <div class="layout-content">
+                    <iframe class="contentFrame" name="contentFrame" :src="url.router.admin.welcome"
+                            id="contentFrame"></iframe>
+                </div>
+
+            </i-Col>
+
+        </Row>
+    </div>
+
+    <my-footer></my-footer>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
+
+    window.onload = function () {
+        setIframeHeight(document.getElementById('contentFrame'));
+    };
+    var app = new Vue({
+        el: '#app',
+        data: {
+            spanLeft: 5,
+            spanRight: 19,
+            url: routerUrl
+        },
+        computed: {
+            iconSize: function () {
+                return this.spanLeft === 5 ? 14 : 24;
+            }
+        },
+        methods: {
+            toggleClick: function () {
+                if (this.spanLeft === 5) {
+                    this.spanLeft = 3;
+                    this.spanRight = 21;
+                } else {
+                    this.spanLeft = 5;
+                    this.spanRight = 19;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

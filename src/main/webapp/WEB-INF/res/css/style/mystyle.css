@@ -1,0 +1,71 @@
+.myborder {
+    margin-bottom: 10px;
+}
+
+.myborder2 {
+    border: 1px solid black;
+}
+
+.myAlignLeft {
+    align: left;
+}
+
+.flexbox {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    text-align: center;
+    font-family: Microsoft YaHei;
+}
+
+.flexboxText {
+    display: flex;
+    display: -webkit-flex;
+    align-items: top;
+    text-align: left;
+    font-family: Microsoft YaHei;
+}
+
+.item2 {
+    order: 2;
+}
+
+.item1 {
+    order: 1;
+}
+
+.Aa {
+
+}
+
+.Uu {
+
+}
+
+.Dd {
+
+}
+
+.Ll {
+
+}
+
+.btn_OrderStatus {
+
+}
+
+.btn_OrderEvaluation {
+
+}
+
+.img_OrderEvaluation {
+
+}
+
+.img_UserEvaluation {
+
+}
+
+.img_UserFavorites {
+
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style/style.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <div v-if="isLogin">
+        <h1>欢迎使用</h1>
+    </div>
+    <row class="loginRow" v-if="!isLogin">
+        <i-col>
+            <i-col :lg="{span:6,offset:5}" :xs=" {span:22,offset:1} ">
+                <i-form ref="formInline" :model="formInline" :rules="ruleInline">
+                    <h2>管理员登录</h2>
+                    <form-item prop="account">
+                        <i-input type="text" v-model="formInline.account" placeholder="用户账号" size="large">
+                            <!--前置插入图标-->
+                            <Icon type="person" slot="prepend"></Icon>
+                        </i-input>
+                    </form-item>
+                    <form-item prop="password">
+                        <i-input type="password" v-model="formInline.password" placeholder="密码" size="large"
+                                 v-on:on-enter="handleSubmit('formInline')">
+                            <Icon type="locked" slot="prepend"></Icon>
+                        </i-input>
+                    </form-item>
+                    <form-item>
+                        <!--提交按钮-->
+                        <i-button type="primary" long @click="handleSubmit('formInline')">登录
+                        </i-button>
+                    </form-item>
+                </i-form>
+            </i-col>
+        </i-col>
+    </row>
+
+</div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/welcome.js"></script>
+</body>
+</html>

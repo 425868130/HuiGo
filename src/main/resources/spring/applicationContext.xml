@@ -4,13 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--引入属性文件-->
     <context:property-placeholder location="classpath:properties/mail.properties,classpath:properties/jdbc.properties"/>
-    <!--配置数据源-->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-          p:driverClassName="${dev_driverClassName}"
-          p:url="${dev_url}" p:username="${dev_userName}"
-          p:password="${dev_passWord}"
-          p:initialSize="${dev_initialSize}"
-          p:maxActive="${dev_maxActive}"/>
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
@@ -41,4 +34,23 @@
         <!-- 发件人email -->
         <property name="from" value="${mail.username}"/>
     </bean>
+
+    <!--配置数据源-->
+    <beans profile="dev">
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+              p:driverClassName="${dev_driverClassName}"
+              p:url="${dev_url}" p:username="${dev_userName}"
+              p:password="${dev_passWord}"
+              p:initialSize="${dev_initialSize}"
+              p:maxActive="${dev_maxActive}"/>
+    </beans>
+    <!--线上环境配置-->
+    <beans profile="prod">
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+              p:driverClassName="${prod_driverClassName}"
+              p:url="${prod_url}" p:username="${prod_userName}"
+              p:password="${prod_passWord}"
+              p:initialSize="${prod_initialSize}"
+              p:maxActive="${prod_maxActive}"/>
+    </beans>
 </beans>

@@ -162,7 +162,7 @@ public class OrderDaoImpl implements OrderDao {
             while (iterator.hasNext()) {
                 String key = iterator.next();
                 /*拼接HQL语句*/
-                stringBuilder.append(key + " =  " + conditions.get(key));
+                stringBuilder.append(key + " =  " + "'" + conditions.get(key) + "'");
                 if (iterator.hasNext()) {
                     stringBuilder.append(" AND ");
                 }
@@ -259,10 +259,19 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public List<Order> getShopOrders(Shop shop, OrderStatus orderStatus, int page, int pageSize) {
-        String hql = "from Order where orderStatus=:status and goods.shop.id =:shopid";
-        Query query = getSession().createQuery(hql);
-        query.setParameter("status", orderStatus.name());
-        query.setParameter("shopid", shop.getId());
+        String hql;
+        Query query;
+        if (orderStatus == null) {
+            hql = "from Order where goods.shop.id =:shopid";
+            query = getSession().createQuery(hql);
+            query.setParameter("shopid", shop.getId());
+        } else {
+            hql = "from Order where orderStatus=:status and goods.shop.id =:shopid";
+            query = getSession().createQuery(hql);
+            query.setParameter("status", orderStatus.name());
+            query.setParameter("shopid", shop.getId());
+        }
+
         /*如果pageSize大于0才进行分页*/
         if (pageSize > 0) {
             int startIndex = (page - 1) * pageSize;

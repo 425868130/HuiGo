@@ -12,6 +12,7 @@ import java.sql.Timestamp;
  * 消息记录表实体
  */
 @Entity
+@Table(name = "message")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties({"sender", "receiver", "gmtModified"})
@@ -54,6 +55,7 @@ public class Message implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

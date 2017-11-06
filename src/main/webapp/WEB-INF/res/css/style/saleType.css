@@ -1,0 +1,62 @@
+/*团购分类页面*/
+
+.my-border {
+    border: solid 1px red;
+}
+
+.content-row {
+    margin-top: 15px;
+}
+
+.content-col {
+    background-color: white;
+    padding-bottom: 30px;
+}
+
+/*单个团购活动列表项的样式*/
+.groupItemDiv {
+    /* width: 184px;*/
+    height: auto;
+    background-color: #f8f8f9;
+    border: solid #dddee1 1px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.groupItemDiv:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #c7c7c7;
+}
+
+.price {
+    color: orangered;
+    font-size: 20px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.groupTime {
+    width: 90%;
+    margin-left: 5%;
+    color: #b56e00;
+}
+
+.groupName {
+    color: #495060;
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.express {
+    color: #80848f;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.groupList {
+    margin-top: 10px;
+}

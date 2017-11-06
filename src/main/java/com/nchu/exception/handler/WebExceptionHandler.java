@@ -1,6 +1,5 @@
 package com.nchu.exception.handler;
 
-import com.nchu.exception.GoodsException;
 import com.nchu.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +34,7 @@ public class WebExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     public @ResponseBody
     ResponseEntity<ServiceException> ServiceExceptionHandler(ServiceException userExc) throws IOException {
+        // userExc.printStackTrace();
         return new ResponseEntity<>(userExc, HttpStatus.NOT_FOUND);
     }
 }

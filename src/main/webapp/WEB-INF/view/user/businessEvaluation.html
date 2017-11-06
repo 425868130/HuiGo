@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>惠Go-个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap/bootstrap1.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap/bootstrap-select.min.css" rel='stylesheet' type='text/css'/>
+
+    <!-- Custom CSS -->
+    <link href="/css/bootstrap/mystyle.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap/style3.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap/font-awesome.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!----webfonts--->
+    <!---//webfonts--->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/myfunction.js" charset="utf-8"></script>
+    <script src="/js/bootstrap/bootstrap1.min.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
+</head>
+<body style="background-color: white">
+<div id="app">
+    <div id="wrapper">
+        <div class="navbar navbar-default" role="navigation" style="padding-left:20px;margin-bottom:0px">
+            <div>
+                <label class="navbar-text navbar-left" id="Hello">{{user.nickName}}</label>
+                <button class="btn btn-link btn-lg navbar-left">消息（0）</button>
+                <button class="btn btn-link btn-lg navbar-right" style="margin-right:100px">联系客服</button>
+                <button class="btn btn-link btn-lg navbar-right">卖家中心</button>
+                <button class="btn btn-link btn-lg navbar-right">商品分类</button>
+                <button class="btn btn-link btn-lg navbar-right">收藏夹</button>
+                <button class="btn btn-link btn-lg navbar-right">个人中心</button>
+                <button class="btn btn-link btn-lg navbar-right">我的惠Go</button>
+                <button class="btn btn-link btn-lg navbar-right">惠Go网首页</button>
+            </div>
+        </div>
+
+        <div class="panel panel-heading row flexbox">
+            <h1 class="col-md-2  text-left">我的惠Go</h1>
+            <a href="/person" class="btn btn-link btn-lg col-md-1">首页</a>
+            <a href="##" class="btn btn-link btn-lg col-md-1">账户设置</a>
+            <a href="##" class="btn btn-link btn-lg col-md-1">消息</a>
+            <div class="col-md-3 col-md-offset-3">
+                <form action="##" class="navbar-form " rol="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入关键词"/>
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+        </div>
+        <!--下拉菜单-->
+        <div class="navbar-default sidebar" role="navigation" style="background-color: whitesmoke;margin-top: 0px">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-dashboard fa-fw nav_icon"></i>个人<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="UserPersonDataInfoServlet"></i>安全设置</a>
+                            </li>
+                            <li>
+                                <a href="UserMyOrderServlet"></i>个人资料</a>
+                            </li>
+                            <li>
+                                <a href="#">我的订单</a>
+                            </li>
+                            <li>
+                                <a href="UserQueryComplainServlet"></i>收货地址</a>
+                            </li>
+                            <li>
+                                <a href="UserQueryComplainServlet"></i>支付方式绑定</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-dashboard fa-fw nav_icon"></i>商家<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/user/businessOrderManage"></i>订单管理</a>
+                            </li>
+                            <li>
+                                <a href="/user/businessInfoManage"></i>商家信息</a>
+                            </li>
+                            <li>
+                                <a href="/user/businessGoodsInfo"></i>商品管理</a>
+                            </li>
+                            <li>
+                                <a href="/user/businessEvaluation"></i>查看评论</a>
+                            </li>
+                            <li>
+                                <a href="/user/businessGroupPurchase"></i>团购活动</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+
+        <!-- /.navbar-static-side -->
+        <!-- 右边信息 -->
+
+        <!--<div class="col-md-3 col-md-offset-3" style="border: solid 1px red">-->
+        <!--<form action="##" class="navbar-form " rol="search">-->
+        <!--<div class="form-group">-->
+        <!--<input type="text" class="form-control" placeholder="请输入关键词"/>-->
+        <!--</div>-->
+        <!--<button type="submit" class="btn btn-default">搜索</button>-->
+        <!--</form>-->
+        <!--</div>-->
+        <div id="page-wrapper">
+            <div class="col-md-12 graphs">
+                <div class="xs">
+                    <h2>评论详情</h2>
+                    <div class="panel-body1">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>商品名</th>
+                                <th>评分;</th>
+                                <th>评论日期</th>
+                                <th>评价内容</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <!--<td>{{user.nickName}}</td>-->
+                                <!--<td>{{goods.name}}</td>-->
+                                <!--<td>{{score}}</td>-->
+                                <!--<td>{{gmt_create}}</td>-->
+                                <!--<td>{{content}}</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <!-- /#page-wrapper -->
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-footer row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-1 col-md-offset-4 text-center">
+                    <ul class="list-unstyled">
+                        <li><label>关于惠Go网</label>
+                        <li>
+                            <button class="btn btn-link" type="button">帮助中心</button>
+                        <li>
+                            <button class="btn btn-link" type="button">诚聘英才</button>
+                        <li>
+                            <button class="btn btn-link" type="button">法律声明</button>
+                    </ul>
+                </div>
+                <div class="col-md-1 text-center">
+                    <ul class="list-unstyled">
+                        <li><label>买家中心</label>
+                        <li>
+                            <button class="btn btn-link" type="button">在线答疑</button>
+                        <li>
+                            <button class="btn btn-link" type="button">服务保障</button>
+                    </ul>
+                </div>
+                <div class="col-md-1 text-center">
+                    <ul class="list-unstyled">
+                        <li><label>卖家中心</label>
+                        <li>
+                            <button class="btn btn-link" type="button">在线咨询</button>
+                        <li>
+                            <button class="btn btn-link" type="button">商品报名</button>
+                        <li>
+                            <button class="btn btn-link" type="button">商家规则</button>
+                        <li>
+                            <button class="btn btn-link" type="button">规则通知</button>
+                    </ul>
+                </div>
+                <div class="col-md-1 text-center">
+                    <ul class="list-unstyled">
+                        <li><label>有话要说</label>
+                        <li>
+                            <button class="btn btn-link" type="button">客服热线</button>
+                        <li>
+                            <button class="btn btn-link" type="button">廉政举报</button>
+                        <li>
+                            <button class="btn btn-link" type="button">我要投诉</button>
+                    </ul>
+                </div>
+                <div class="col-md-1 text-center">
+                    <ul class="list-unstyled">
+                        <li><label>服务保障</label>
+                        <li>
+                            <button class="btn btn-link" type="button">七天无理由退换货</button>
+                        <li>
+                            <button class="btn btn-link" type="button">维修/保养</button>
+                        <li>
+                            <button class="btn btn-link" type="button">购买延保服务</button>
+                        <li>
+                            <button class="btn btn-link" type="button">退换货政策</button>
+                    </ul>
+                </div>
+            </div>
+            <p>&nbsp;
+            <p>&nbsp;
+                <div class="col-md-12">
+                    <div class="row text-center">
+                        <a>关于网站</a>&nbsp;
+                        <a>帮助中心</a>&nbsp;
+                        <a>开放平台</a>&nbsp;
+                        <a>招聘信息</a>&nbsp;
+                        <a>联系我们</a>&nbsp;
+                        <a>网站合作</a>&nbsp;
+                        <a>法律声明及隐私权政策</a>&nbsp;
+                        <a>知识产权</a>&nbsp;
+                        <a>廉政举报</a>&nbsp;
+                    </div>
+            <p>&nbsp;
+            <div class="row text-center">
+                <label>增值电信业务经营许可证：xxx-xxxx</label>
+                <label>网络文化经营许可证：xxx-xxxx</label>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="/css/bootstrap/custom.css" rel="stylesheet">
+<script type="text/javascript" src="/js/vue/vue.js"></script>
+<script type="text/javascript" src="/js/iview/iview.js"></script>
+<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/custom.js"></script>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            url: routerUrl,
+            user: '',
+            evaluationList: []
+        },
+        method: {},
+        cteated: function () {
+            getLoginUser();
+        }
+    });
+
+    /*获取登录的用户信息*/
+    function getLoginUser() {
+        /*先获取Session的用户信息,不存在表示用户未登录*/
+        return Ajx.get(routerUrl.get.userInfo).then(function (response) {
+            if (response.data != undefined) {
+                app.user = response.data;
+                app.isLogin = true;
+            }
+        }).catch(function (error) {
+            app.isLogin = false;
+        });
+    };
+
+    function getEvaluationList() {
+        Ajx.get(routerUrl.get.evaluationList).then(function (response) {
+            response.data.forEach(function (evaluationInfoView) {
+                app.evaluationList.push(evaluationInfoView);
+            })
+        })
+    }
+</script>
+</body>
+</html>

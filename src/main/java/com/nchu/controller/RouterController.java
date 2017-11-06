@@ -31,12 +31,24 @@ public class RouterController {
         return "index";
     }
 
+    /*管理员*/
+    @RequestMapping(value = "/admin")
+    public String admin() {
+        return "admin/manager";
+    }
+
     /*用户登录*/
     @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public String login() {
         return "user/login";
     }
 
+    /*用户注销*/
+    @RequestMapping("user/logout")
+    public String logout(HttpServletRequest request) {
+        sessionService.removeUser(request);
+        return "user/login";
+    }
     /*会员注册*/
     @RequestMapping(value = "/user/vipReg", method = RequestMethod.GET)
     public String vipReg() {
@@ -82,49 +94,9 @@ public class RouterController {
     }
 
     /*商品搜索控制器*/
-    @RequestMapping(value = "/searchGoods/{goodsKeyWords}", method = RequestMethod.GET)
-    public String ToGoodsSearch(@PathVariable("goodsKeyWords") String keyWords, HttpServletRequest request, Model model) {
-        /*前后端分离时将关键词保存到Session*/
-        sessionService.addAttr(request, "goodsKeyWords", keyWords);
-        /*使用服务器渲染时传递关键词到页面*/
-        model.addAttribute("goodsKeyWords", keyWords);
-        return "goods/searchResult";
-    }
-
-    /*跳转到店铺详情页面*/
-    @RequestMapping(value = "/shop/shopInfo/{shopId}", method = RequestMethod.GET)
-    public String ToShopInfo(@PathVariable("shopId") long shopId, HttpServletRequest request, Model model) {
-        sessionService.addAttr(request, "shopId", shopId);
-        model.addAttribute("shopId", shopId);
-        return "shop/shopInfo";
-    }
-
-    /*跳转到商品详情页面*/
-    @RequestMapping(value = "/shop/goodsInfo/{goodsId}", method = RequestMethod.GET)
-    public String ToGoodsInfo(@PathVariable("goodsId") long goodsId, HttpServletRequest request, Model model) {
-        sessionService.addAttr(request, "goodsId", goodsId);
-        model.addAttribute("goodsId", goodsId);
-        return "shop/goodsInfo";
-    }
-
-    /*跳转到团购详情页面*/
-    @RequestMapping(value = "/group/groupInfo/{groupId}", method = RequestMethod.GET)
-    public String ToGroupInfo(@PathVariable("groupId") long groupId, HttpServletRequest request, Model model) {
-        sessionService.addAttr(request, "groupId", groupId);
-        model.addAttribute("groupId");
-        return "group/groupInfo";
-    }
-
-    /*商品搜索控制器*/
     @RequestMapping(value = "/searchGoods", method = RequestMethod.GET)
     public String ToGoodsSearch() {
         return "goods/searchResult";
-    }
-
-    /*跳转到店铺详情页面*/
-    @RequestMapping(value = "/shop/shopInfo", method = RequestMethod.GET)
-    public String ToShopInfo() {
-        return "shop/shopInfo";
     }
 
     /*跳转到商品详情页面*/
@@ -149,9 +121,19 @@ public class RouterController {
         return "user/personal_Information";
     }
 
-    @RequestMapping(value = "/user/personOrder", method = RequestMethod.GET)
-    public String ToPersonOrder() {
-        return "user/PersonOrder";
+    /*订单支付页面*/
+    @RequestMapping(value = "/order/payment", method = RequestMethod.GET)
+    public String ToPayment(HttpServletRequest request, Model model) {
+        model.addAttribute("paymentGroup", sessionService.getAttr(request, "paymentGroup"));
+        return "order/payMent";
+    }
+
+
+    /*跳转到团购分类页面*/
+    @RequestMapping(value = "/group/saleTypePage", method = RequestMethod.GET)
+    public String ToSaleTypePage(HttpServletRequest request, Model model) {
+        model.addAttribute("saleTypeId", sessionService.getAttr(request, "saleTypeId"));
+        return "group/saleType";
     }
 
     /*获取用户收货地址*/
@@ -170,5 +152,38 @@ public class RouterController {
             i++;
         }
         return str;
+    }
+
+    /*跳转到店铺详情页面*/
+    @RequestMapping(value = "/shop/shopInfo", method = RequestMethod.GET)
+    public String ToShopInfo(HttpServletRequest request, Model model) {
+        model.addAttribute("shopInfoId", sessionService.getAttr(request, "shopInfoId"));
+        return "shop/shopInfo";
+    }
+
+    /******************************************************/
+    @RequestMapping(value = "/user/businessInfoManage", method = RequestMethod.GET)
+    public String businessInfoManage() {
+        return "user/businessInfoManage";
+    }
+
+    @RequestMapping(value = "/user/businessGoodsInfo", method = RequestMethod.GET)
+    public String businessGoodsInfo() {
+        return "user/businessGoodsInfo";
+    }
+
+    @RequestMapping(value = "/user/businessEvaluation", method = RequestMethod.GET)
+    public String businessEvaluation() {
+        return "user/businessEvaluation";
+    }
+
+    @RequestMapping(value = "/user/businessGroupPurchase", method = RequestMethod.GET)
+    public String businessGroupPurchase() {
+        return "user/businessGroupPurchase";
+    }
+
+    @RequestMapping(value = "user/businessOrderManage", method = RequestMethod.GET)
+    public String businessOrderManage() {
+        return "user/businessOrderManage";
     }
 }

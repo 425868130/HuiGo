@@ -1,0 +1,81 @@
+/*公共css样式*/
+/*顶部搜索框样式*/
+* {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+body {
+    background-color: #f8f8f9;
+}
+
+/*顶部菜单栏样式*/
+.topMenu {
+    min-height: 25px;
+}
+
+.topMenu a {
+    color: #80848f;
+}
+
+.topMenu a:hover {
+    color: #CC0033;
+}
+
+/*搜索样式*/
+.topBarRow {
+    background-color: white;
+    box-shadow: 0px 5px 2px #f0f0f0;
+    min-height: 65px;
+    width: 100%;
+}
+
+.affix-search {
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+}
+
+.topBar {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.logoPic {
+    float: left;
+}
+
+.logoText {
+    float: left;
+    margin-left: 10px;
+}
+
+/*替换iView默认样式*/
+.ivu-input {
+    border-radius: 0px;
+}
+
+.ivu-input-group-append {
+    border-radius: 0px;
+    border: solid 1px red;
+    color: white;
+    background-color: red;
+}
+
+.ivu-input:focus {
+    border-color: red;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgba(240, 71, 118, 0.2);
+}
+
+.ivu-input:hover {
+    border-color: red;
+}
+
+.searchButton {
+    width: 80px;
+}

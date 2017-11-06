@@ -141,7 +141,7 @@ public class ShopDaoImpl implements ShopDao {
      */
     @Override
     public List<Shop> listAll() {
-        String hql = "from Shop where islocked = 0 and isVerify=1";
+        String hql = "from Shop where isVerify=1";
         Query query = getSession().createQuery(hql);
         return query.list();
     }
@@ -174,9 +174,12 @@ public class ShopDaoImpl implements ShopDao {
         }
 
         Query query = session.createQuery(hql);
-        int startIndex = (page - 1) * pageSize;
-        query.setFirstResult(startIndex);
-        query.setMaxResults(pageSize);
+        /*-1则不分页*/
+        if (pageSize == -1) {
+            int startIndex = (page - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+        }
         List<Shop> list = query.list();
         return list;
     }

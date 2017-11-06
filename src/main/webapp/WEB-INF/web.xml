@@ -6,6 +6,12 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+    <!--配置当前激活的属性，为上下文设置默认的profile-->
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+
     <!--设置Spring全局系统配置路径-->
     <context-param>
         <param-name>contextConfigLocation</param-name>

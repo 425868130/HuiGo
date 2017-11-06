@@ -3,10 +3,7 @@ package com.nchu.service;
 import com.nchu.entity.*;
 import com.nchu.enumdef.OrderStatus;
 import com.nchu.enumdef.PaymentMethod;
-import com.nchu.exception.OrderException;
-import com.nchu.exception.ShopException;
-import com.nchu.exception.UserServiceException;
-import com.nchu.exception.VouchersException;
+import com.nchu.exception.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public interface OrderService {
      * @param order 　订单实体
      * @return 操作结果
      */
-    boolean createOrder(Order order) throws OrderException;
+    Long createOrder(Order order) throws OrderException, GroupPurchaseException;
 
     /**
      * TODO 获取用户指定状态的全部订单
@@ -94,4 +91,6 @@ public interface OrderService {
      * @return 订单列表
      */
     List<Order> getShopOrders(Shop shop, OrderStatus orderStatus, int page, int pageSize) throws ShopException, OrderException;
+
+    Order searchOrderById(Long id);
 }

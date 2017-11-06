@@ -83,7 +83,7 @@ public class SimpleGroupView {
     }
 
     /*从团购活动详细信息中筛选前端所需信息*/
-    public static List<SimpleGroupView> getHotGroupList(List<GroupPurchase> groupPurchaseList) {
+    public static List<SimpleGroupView> transFromGroupList(List<GroupPurchase> groupPurchaseList) {
         return groupPurchaseList.stream().map(groupPurchase -> {
             SimpleGroupView hotGroupView = new SimpleGroupView();
             hotGroupView.setGroupId(groupPurchase.getId());

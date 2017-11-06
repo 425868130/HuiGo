@@ -18,6 +18,7 @@ import java.util.Set;
  * 商品表实体类
  */
 @Entity
+@Table(name = "goods")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties(value = {"shop", "evaluations", "groupPurchase", "gmtCreate", "gmtModified"})
@@ -94,6 +95,7 @@ public class Goods implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

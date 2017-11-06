@@ -40,4 +40,5 @@ public interface EvaluationService {
      */
     boolean clearAllEvaluation(Goods goods, User operator) throws EvaluationException;
 
+    List<Evaluation> listUserEvaluation(User user, int page, int pageSize);
 }

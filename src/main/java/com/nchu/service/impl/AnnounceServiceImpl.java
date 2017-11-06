@@ -55,6 +55,11 @@ public class AnnounceServiceImpl implements AnnounceService {
         return ad.searchPage(null, page, pageSize);
     }
 
+    @Override
+    public List<Announcement> listAll() {
+        return ad.listAll();
+    }
+
     /**
      * TODO 删除公告
      * 验证操作人为管理员
@@ -74,5 +79,10 @@ public class AnnounceServiceImpl implements AnnounceService {
             }
         } else
             throw new AnnouncementException("删除公告非法操作者");
+    }
+
+    @Override
+    public void addAnnounceMent(Announcement announcement) {
+        ad.save(announcement);
     }
 }

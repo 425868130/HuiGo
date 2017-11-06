@@ -27,6 +27,7 @@ var app = new Vue({
                             }
                         ).then(function (response) {
                             if (response.data == true) {
+                                document.cookie = "account=" + app.formInline.account + ";path=/"
                                 /*登录成功跳转首页*/
                                 VRouter(routerUrl.router.index);
                             }

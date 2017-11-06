@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>惠Go</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <row>
+        <i-col>
+            <h1>发布公告 &nbsp;<Icon type="ios-compose-outline"></Icon>
+            </h1>
+            <p>公告标题:</p>
+            <i-input v-model="noticeTitle" placeholder="公告标题..."></i-input>
+            <p>公告内容:</p>
+            <i-input v-model="noticeTxt" type="textarea" :autosize="{minRows: 2,maxRows: 5}"
+                     placeholder="请输入..."></i-input>
+            <i-col style="margin-top: 10px;float: right" size="large">
+                <i-button type="primary" style="width: 120px;height: 50px" @click="addNotice">发布公告</i-button>
+            </i-col>
+        </i-col>
+    </row>
+
+    <h1>历史公告</h1>
+    <hr>
+    <i-table border :columns="tableColumns" :data="NoticeList"></i-table>
+
+    <row type="flex" justify="center" style="margin-top: 20px;padding-bottom:20px;background-color: white"
+         v-if="NoticeList.length>0">
+        <page :page-size="pageSize" :total="totalRecord" @on-change="pageChange"></page>
+    </row>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/webNotice.js"></script>
+</body>
+</html>

@@ -172,11 +172,13 @@ public class EvaluationDaoImpl implements EvaluationDao {
         }
 
         Query query = session.createQuery(hql);
-        int startIndex = (page - 1) * pageSize;
-        query.setFirstResult(startIndex);
-        query.setMaxResults(pageSize);
-        List<Evaluation> list = query.list();
-        return list;
+        /*如果页面大小不为-1则查询全部评论*/
+        if (pageSize != -1) {
+            int startIndex = (page - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+        }
+        return query.list();
     }
 
     /**

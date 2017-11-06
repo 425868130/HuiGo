@@ -1,29 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>惠Go</title>
+    <title>[惠Go]店铺详情</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
-    <style>
-
-    </style>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/style/shopInfo.css">
 </head>
 <body>
 <div id="app">
-    <row>
-        <i-col>
-            店铺详情页面
+    <span th:text="${shopId}" id="shopId" style="display: none"></span>
+    <my-header></my-header>
+    <row class="contentRow">
+        <i-col class="contentCol" :lg="{span:14,offset:5}">
+
+            <row v-cloak>
+                <i-col>
+                    <span class="shopTips"><Icon type="ios-home-outline"></Icon>&nbsp;店铺详情</span>
+                </i-col>
+                <!--店铺详情-->
+                <row style="margin-top: 10px">
+                    <i-col>
+                        <Card :bordered="false" style="min-height: 250px" dis-hover>
+                            <div style="width:40%;float: right;margin-right: 10px">
+                                <img :src="shopInfo.logo" class="shopLogoPic"/>
+                            </div>
+                            <p slot="title" style="font-size: 20px">{{shopInfo.name}}</p>
+                            <div style="width: 45%">
+                                <Rate disabled :value="3.5" show-text></Rate>
+                                <p>地址:&nbsp;{{shopInfo.addresss}}</p><br>
+                                <p>服务电话:&nbsp;{{shopInfo.serviceTel}}</p><br>
+                                <p>店铺描述:&nbsp;{{shopInfo.description}}</p>
+                            </div>
+                        </Card>
+                        <Collapse style="background-color: white;border: none">
+                            <Panel name="1">
+                                <span style="color:#5cadff;">许可证信息</span>
+                                <div slot="content">
+                                    <p style="color: #80848f;font-size:20px;">经营许可证注册号:&nbsp;
+                                        <span v-text="shopInfo.licenseCode"></span>
+                                    </p><br>
+                                    <img :src="shopInfo.licensePic" class="licensePic"/>
+                                </div>
+                            </Panel>
+                        </Collapse>
+                    </i-col>
+                </row>
+
+            </row>
+
+            <!--团购活动列表-->
+            <row v-cloak>
+                <i-col class="groupList">
+                    <Card dis-hover>
+                        <p slot="title">店铺团购列表</p>
+
+                        <!--团购商品列表-->
+                        <row class="groupList" v-if="groupList.length!=0">
+                            <row :gutter="8" type="flex" justify="start">
+                                <i-col :lg="{span:6,offset:0}" :xs="{span:12,offset:0}" v-for="group in groupList"
+                                       :key="group.id">
+                                    <div @click="routerToGroup(group.groupId)" class="groupItemDiv">
+                                        <img :src="group.groupImg" style="height: 100%;width: 100%;"/>
+                                        <p class="groupName">{{group.goodsName}}</p>
+                                        <p><span class="price">¥&nbsp;{{group.groupPrice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="color: grey;">原价:&nbsp;<s>{{group.originPrice}}</s></span></p>
+                                        <p class="groupTime">团购时间:{{group.startDate}}</p>
+                                    </div>
+                                </i-col>
+                            </row>
+
+                            <row type="flex" justify="center" style="margin-top: 10px">
+                                <Page :total="totalRecord" :page-size="pageSize" @on-change="pageChange"></Page>
+                            </row>
+
+                        </row>
+                        <!--为空-->
+                        <row v-if="groupList.length==0">
+                            <i-col :lg="{span:10,offset:7}">
+                                <img :src="url.res.EmptySaleType" style="width: 100%;height: 100%;"/>
+                                <p style="text-align: center;font-size: 25px;color:grey;">该店铺下没有团购活动</p>
+                            </i-col>
+                        </row>
+                    </Card>
+                </i-col>
+            </row>
+
         </i-col>
     </row>
 
     <my-footer></my-footer>
+    <back-top :right="10" :bottom="20"></back-top>
 </div>
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
 <script type="text/javascript" src="/js/project/webRouter.js"></script>
-<script type="text/javascript" src="/js/project/footer.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script type="text/javascript" src="/js/project/shopInfo.js"></script>
 </body>
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>[惠Go]订单支付</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/style/payment.css">
+</head>
+<body>
+<span style="display:none;" th:text="${paymentGroup}" id="paymentGroup"></span>
+<div id="app" v-cloak>
+    <my-header v-on:user-status="getUser"></my-header>
+
+    <!--参团时的支付页面-->
+    <row class="paymentRow contentRow">
+
+        <i-col :lg="{span:16,offset:4}" class="contentCol paymentCol">
+            <icol :lg="{span:6,offset:4}"><h2 style="font-size: 25px">参团结算</h2><br></icol>
+            <row class="simpleGoods white-row">
+                <row>
+                    <i-col>
+                        <p style="font-size: 15px">
+                            <Icon type="ios-home-outline"></Icon>
+                            店铺:{{shop.name}}
+                        </p>
+                        <br>
+                    </i-col>
+                </row>
+                <!--商品简单信息-->
+                <row class="white-row" style="padding-bottom: 10px">
+                    <i-col :lg="{span:4}" :xs="{span:8}">
+                        <div style="width: 100%;height: 100%">
+                            <img :src="goods.picture" style="width:100%;height: 100%">
+                        </div>
+                    </i-col>
+                    <i-col :lg="{span:19,offset:1}" :xs="{span:15,offset:1}">
+                        <h4 v-text="goods.name"></h4>
+                        <p v-text="groupInfo.description" class="group-description"></p>
+                        <p v-text="goods.description" class="goods-simple-desc"></p>
+                        <p style="color: #bbbec4;">原价:<s>¥{{goods.originalprice}}</s></p>
+                        <p style="color: red;font-size: 20px">
+                            参团价:¥{{goods.preferentialprice}}
+                        </p>
+                        <p class="express">快递配送:&nbsp;<span
+                                style="color: #4050a5">{{express.name}}&nbsp;&nbsp;{{express.price}}元</span>
+                        </p>
+                        <p>总计(含运费):<span style="color: red">&nbsp;¥&nbsp;{{totalPrice}}</span></p>
+                    </i-col>
+                </row>
+            </row>
+            <!--收货地址及备注-->
+            <row class="white-row" style="margin-top: 10px">
+                <i-col :lg="{offset:1}" :xs="{offset:1}">
+                    <h3>
+                        <Icon type="location"></Icon>&nbsp;&nbsp;确认收货地址
+                    </h3>
+                    <i-col style="margin-top: 10px;" :lg="{offset:1}">
+                        <radio-group vertical="true" v-model="addressId" style="width: 100%">
+                            <radio v-for="address in receivingAddress" :label="address.id" :key="address.id"
+                                   class="addressRadio">
+                                <span>{{address.address}}&nbsp;({{address.name}}&nbsp;&nbsp;收)&nbsp;&nbsp;{{address.tel}}</span>
+                            </radio>
+                        </radio-group>
+                        <a :href="url.router.personal_Address">
+                            <Icon type="compose"></Icon>&nbsp;&nbsp;管理收货地址
+                        </a>
+                    </i-col>
+                </i-col>
+
+                <row style="margin-top: 10px">
+                    <i-col :lg="{offset:1}" :xs="{offset:1}">
+                        <Icon type="chatbox-working"></Icon>&nbsp;&nbsp;给买家留言:
+                        <i-input type="textarea" :autosize="{minRows: 2,maxRows: 2}" placeholder="请输入..."
+                                 v-model="remark"></i-input>
+                        发货时间:卖家承诺订单在买家付款后, 24小时内发货
+                    </i-col>
+
+                    <i-col>
+                        <div style="float: right;margin-right: 10px;padding-bottom: 20px">
+                            <p style="font-size: 17px">实付款:¥
+                                <span style="color: red;font-size: 25px">{{totalPrice}}</span></p>
+                            <button class="order-commit" @click="submitOrder">提交订单</button>
+                        </div>
+                    </i-col>
+                </row>
+
+            </row>
+
+        </i-col>
+    </row>
+
+    <my-footer></my-footer>
+    <!--支付模态框-->
+    <Modal v-model="paymentShow" :mask-closable="false" @on-cancel="cancelPayment">
+        <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="card"></Icon>
+            <span>订单支付</span>
+        </p>
+        <i-form style="text-align:center" label-position="left">
+            <form-item label="支付方式:">
+                <i-select v-model="paymentSelected" style="width: 80%">
+                    <i-option v-for="item in paymentMethods" :value="item.paymentMethod" :key="item.id">
+                        {{item.discription }}
+                    </i-option>
+                </i-select>
+            </form-item>
+            <form-item v-if="paymentSelected == 'ACCOUNT'">
+                <span style="font-size: 18px">账户余额:&nbsp;<span v-text="user.balance"></span>&nbsp;元</span>
+            </form-item>
+            <form-item v-if="paymentSelected == 'ALI_PAY'">
+                <img :src="url.res.paymentImg" style="width: 85%;height:300px">
+            </form-item>
+            <form-item v-if="paymentSelected=='BANK_CARD'" label="银行卡号:">
+                <i-input style="width: 80%" placeholder="输入银行卡号"></i-input>
+            </form-item>
+
+            <form-item label="账号密码:">
+                <i-input size="large" type="password" style="width: 80%" placeholder="输入账号密码进行校验"
+                         v-model="password"></i-input>
+            </form-item>
+            <span v-text="paymentTips" v-if="paymentTips!=''" style="color: red"></span>
+        </i-form>
+        <div slot="footer">
+            <i-button type="error" size="large" long :loading="loading" @click="paymentHandler">确认支付</i-button>
+        </div>
+    </Modal>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script type="text/javascript" src="/js/project/payment.js"></script>
+</body>
+</html>

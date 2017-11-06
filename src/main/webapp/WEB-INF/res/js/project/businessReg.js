@@ -1,8 +1,6 @@
 /**
  * 商家注册页面js文件
  */
-var temp;
-
 var app = new Vue({
     el: '#app',
     data: {

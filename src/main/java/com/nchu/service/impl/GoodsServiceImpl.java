@@ -49,7 +49,7 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public boolean addGoods(Goods goods, User operator) throws GoodsException {
-        if (Integer.valueOf(operator.getRole()) == UserRoleType.MERCHANT.getIndex()) {
+        /*if (Integer.valueOf(operator.getRole()) == UserRoleType.MERCHANT.getIndex()) {*/
             if (!shopDao.getByUser(operator).isIslocked()) {
                 try {
                     goods.setIsonshelves(false);
@@ -60,8 +60,8 @@ public class GoodsServiceImpl implements GoodsService {
                 }
             } else
                 throw new GoodsException("添加商品操作者已被锁定");
-        } else
-            throw new GoodsException("添加商品非法操作者");
+        /*} else
+            throw new GoodsException("添加商品非法操作者");*/
     }
 
     /**
@@ -126,15 +126,7 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public List<Goods> searchGoods(String keywords, int page, int pageSize) {
-        Map<String, Object> conditions = new HashMap<>();
-        if (!keywords.equals("")) {
-            conditions.put("name", keywords);
-            conditions.put("isonshelves", 1);
-            return goodsDao.searchPage(conditions, page, pageSize);
-        } else {
-            conditions.put("isonshelves", 1);
-            return goodsDao.searchPage(conditions, page, pageSize);
-        }
+        return goodsDao.searchByNamePage(keywords, page, pageSize);
     }
 
     /**
@@ -147,7 +139,7 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public boolean deleteGoods(Goods goods, User operator) throws GoodsException {
-        if (Integer.valueOf(operator.getRole()) == UserRoleType.MERCHANT.getIndex()) {
+       /* if (Integer.valueOf(operator.getRole()) == UserRoleType.MERCHANT.getIndex()) {*/
             if (shopDao.getByUser(operator).getId() == goods.getShop().getId()) {
                 if (!goods.isIsonshelves()) {
                     try {
@@ -158,8 +150,9 @@ public class GoodsServiceImpl implements GoodsService {
                     }
                 }
             }
-        }
-        throw new GoodsException("删除商品非法操作者");
+       /* }
+        throw new GoodsException("删除商品非法操作者");*/
+        return true;
     }
 
     /**

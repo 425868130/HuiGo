@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/style/mystyle.css" rel="stylesheet"/>
+    <title>Insert title here</title>
+</head>
+<body>
+<div class="navbar navbar-default " role="navigation" style="padding-left:20px;margin-bottom:0px">
+    <div class="flexbox">
+        <label class="navbar-text " id="Hello"></label>
+        <button class="btn btn-link btn-md">消息（0）</button>
+        <button class="btn btn-link btn-md col-md-1 col-md-offset-3" onclick="window.location.href='/index'">惠Go网首页
+        </button>
+        <button class="btn btn-link btn-md col-md-1">我的惠Go</button>
+        <button class="btn btn-link btn-md col-md-1">个人中心</button>
+        <button class="btn btn-link btn-md col-md-1">收藏夹</button>
+        <button class="btn btn-link btn-md col-md-1">商品分类</button>
+        <button class="btn btn-link btn-md col-md-1" onclick="window.location.href='/user/businessInfoManage'">卖家中心
+        </button>
+        <button class="btn btn-link btn-md col-md-1">联系客服</button>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel panel-heading  flexbox" style="background:#FF0033 ">
+        <h1 class="col-md-2  text-left">我的惠Go</h1>
+        <a href="/personal_Order" class="btn btn-link btn-lg col-md-1" style="color:black">订单管理</a>
+        <a href="/personal_Set" class="btn btn-link btn-lg col-md-1" style="color:black">账户设置</a>
+        <a href="##" class="btn btn-link btn-lg col-md-1" style="color:black">消息</a>
+        <div class="col-md-3 col-md-offset-3">
+            <form action="##" class="navbar-form " rol="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入关键词"/>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+    </div>
+    <div class=" panel-body row" style="padding:0">
+        <ul class="list-unstyled">
+            <li class="col-md-2">
+                <div>
+                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:15px">
+                        <li class="active"><a href="##" style="background:#EEEEEE ;color:black">全部功能</a></li>
+                        <li><a href="/personal_Order">我的订单</a></li>
+                        <li><a href="/personal_Evaluation">我的评价</a></li>
+                        <li><a href="personal_Favorites">我的收藏</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-md-10">
+                <div class="panel panel-default col-md-11">
+                    <div class="panel panel-heading row text-center">
+                        <ul class="list-unstyled">
+                            <li class="col-md-4">
+                                <h5>商品</h5>
+                            </li>
+                            <li class="col-md-3">
+                                <h5>评论时间</h5>
+                            </li>
+                            <li class="col-md-5">
+                                <h5>内容</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" panel-body row text-center" id="Evaluation_body">
+                    </div>
+                    <div class=" panel-footer row">
+                        <div class="col-md-4 col-md-offset-8">
+                            <ul class="pagination ">
+                                <li><a class="col-md-offset-8" href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">8</a></li>
+                                <li><a href="#">&raquo;</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class=" panel-footer row">
+        <div class="col-md-12">
+            <div class="col-md-1 col-md-offset-4 text-center">
+                <ul class="list-unstyled">
+                    <li><label>关于惠Go网</label>
+                    <li>
+                        <button class="btn btn-link" type="button">帮助中心</button>
+                    <li>
+                        <button class="btn btn-link" type="button">诚聘英才</button>
+                    <li>
+                        <button class="btn btn-link" type="button">法律声明</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>买家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线答疑</button>
+                    <li>
+                        <button class="btn btn-link" type="button">服务保障</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>卖家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线咨询</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商品报名</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商家规则</button>
+                    <li>
+                        <button class="btn btn-link" type="button">规则通知</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>有话要说</label>
+                    <li>
+                        <button class="btn btn-link" type="button">客服热线</button>
+                    <li>
+                        <button class="btn btn-link" type="button">廉政举报</button>
+                    <li>
+                        <button class="btn btn-link" type="button">我要投诉</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>服务保障</label>
+                    <li>
+                        <button class="btn btn-link" type="button">七天无理由退换货</button>
+                    <li>
+                        <button class="btn btn-link" type="button">维修/保养</button>
+                    <li>
+                        <button class="btn btn-link" type="button">购买延保服务</button>
+                    <li>
+                        <button class="btn btn-link" type="button">退换货政策</button>
+                </ul>
+            </div>
+        </div>
+        <p>&nbsp;
+        <p>&nbsp;
+            <div class="col-md-12">
+                <div class="row text-center">
+                    <a>关于网站</a>&nbsp;
+                    <a>帮助中心</a>&nbsp;
+                    <a>开放平台</a>&nbsp;
+                    <a>招聘信息</a>&nbsp;
+                    <a>联系我们</a>&nbsp;
+                    <a>网站合作</a>&nbsp;
+                    <a>法律声明及隐私权政策</a>&nbsp;
+                    <a>知识产权</a>&nbsp;
+                    <a>廉政举报</a>&nbsp;
+                </div>
+        <p>&nbsp;
+        <div class="row text-center">
+            <label>增值电信业务经营许可证：xxx-xxxx</label>
+            <label>网络文化经营许可证：xxx-xxxx</label>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    var userId;
+    var page = 1;
+    var pageSize = 5;
+
+    function getLocalTime(timestamp) {
+        Date.prototype.toLocaleString = function () {
+            return this.getFullYear() + "年" + (this.getMonth() + 1) + "月" + this.getDate() + "日 " + this.getHours() + "点" + this.getMinutes() + "分";
+        };
+        return new Date(timestamp).toLocaleString();
+    }
+
+    function getEvaluation() {
+        $("#Evaluation_body").empty();
+        $.ajax({
+            type: "POST", //方法类型
+            url: "user/get_Evaluation",//请求地址
+            dataType: "text",
+            data: {
+                "userId": userId,
+                "page": page,
+                "pageSize": pageSize
+            },
+            success: function (data) {
+                var response = eval(data);
+                for (var i = 0; i < response.length; i++) {
+                    $("#Evaluation_body").append('<ul class="list-unstyled"><li class="col-md-12 "><ul class="list-unstyled "  style="border:1px solid black;">  <li class="col-md-4 "> <img class="col-md-3 img_UserEvaluation " src="" style="margin-top:5px;height: 88%; width: 44%"><label class="col-md-6">' + response[i].name + '</label> </li><li class="col-md-3">' + getLocalTime(response[i].gmtCreate) + '</li><li class="col-md-5">' + response[i].content + '</li></ul></li></ul>');
+                    $(".img_UserEvaluation").not("[id]").attr("src", "" + response[i].picture);
+                }
+            },
+            error: function () {
+                alert("获取评论失败");
+            }
+        });
+    }
+
+    $(function () {
+        $.ajax({
+            type: "GET", //方法类型
+            url: "user/info/425868130",//请求地址
+            dataType: "json", //数据类型
+            success: function (data) {
+                $("#Hello").html("Hi，" + data.nickName);
+                userId = data.id;
+                getEvaluation();
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

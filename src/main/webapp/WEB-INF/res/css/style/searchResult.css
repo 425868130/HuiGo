@@ -1,0 +1,36 @@
+/*搜索结果页面样式*/
+
+.contentRow {
+    margin-top: 10px;
+}
+
+.contentCol {
+}
+
+.goodsItem {
+    background-color: white;
+    margin-left: 5px;
+    margin-top: 5px;
+    /*border: solid 1px red;*/
+}
+
+.goodsItem:hover {
+    cursor: pointer;
+}
+
+.goodsTitle {
+    /*强制不换行*/
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #495060;
+    margin-left: 2%;
+}
+
+.price {
+    color: orangered;
+    font-size: 20px;
+    width: 90%;
+    margin-left: 2%;
+}

@@ -78,4 +78,19 @@ public class EvaluationServiceImpl implements EvaluationService {
         } else
             throw new EvaluationException("清空评价非法操作者");
     }
+
+    /**
+     * TODO 加载用户评价
+     *
+     * @param user     要加载评论的用户
+     * @param page     页码
+     * @param pageSize 每页大小
+     * @return 用户评论列表
+     */
+    @Override
+    public List<Evaluation> listUserEvaluation(User user, int page, int pageSize) {
+        Map<String, Object> conditions = new HashMap<>();
+        conditions.put("userid", user.getId());
+        return ed.searchPage(conditions, page, pageSize);
+    }
 }

@@ -31,7 +31,7 @@ public class VoucherServiceImpl implements VoucherService {
      */
     @Transactional
     @Override
-    public boolean createVouchers(Vouchers vouchers) {
+    public boolean createVouchers(Vouchers vouchers) throws VouchersException {
         vouchers.setGmtModified(DateUtil.getCurrentTimestamp());
         vouchers.setGmtCreate(DateUtil.getCurrentTimestamp());
         vouchers.setIsused(false);
@@ -39,8 +39,12 @@ public class VoucherServiceImpl implements VoucherService {
         calendar.setTime(new Date());
         /*优惠券的有效期为获取后的两天之内*/
         calendar.add(Calendar.DAY_OF_MONTH, 2);
-        vouchers.setIndate((Timestamp) calendar.getTime());
-        vouchersDao.save(vouchers);
+        vouchers.setIndate(Timestamp.from(calendar.getTime().toInstant()));
+        try {
+            vouchersDao.save(vouchers);
+        } catch (Exception e) {
+            throw new VouchersException("团购券创建失败");
+        }
         return true;
     }
 

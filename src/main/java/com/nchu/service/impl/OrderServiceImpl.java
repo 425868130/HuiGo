@@ -6,10 +6,7 @@ import com.nchu.entity.*;
 import com.nchu.enumdef.OrderStatus;
 import com.nchu.enumdef.PaymentMethod;
 import com.nchu.enumdef.VoucherPrice;
-import com.nchu.exception.OrderException;
-import com.nchu.exception.ShopException;
-import com.nchu.exception.UserServiceException;
-import com.nchu.exception.VouchersException;
+import com.nchu.exception.*;
 import com.nchu.service.*;
 import com.nchu.util.DateUtil;
 import com.nchu.util.UUIDUtils;
@@ -43,6 +40,8 @@ public class OrderServiceImpl implements OrderService {
     UserService userService;
     @Autowired
     ShopService shopService;
+    @Autowired
+    GroupPurchaseService groupPurchaseService;
 
     /**
      * TODO　创建订单
@@ -53,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Transactional
     @Override
-    public boolean createOrder(Order order) throws OrderException {
+    public Long createOrder(Order order) throws OrderException, GroupPurchaseException {
         if (order.getUser() == null || order.getGoods() == null || order.getExpressDelivery() == null) {
             throw new OrderException("异常订单,请重试");
         }
@@ -63,15 +62,19 @@ public class OrderServiceImpl implements OrderService {
         /*由控制器传入的关联对象中只含有对应实体类的id属性,需要通过id重新获取对象*/
         Long goodId = order.getGoods().getId();
         Goods goods = goodsService.getById(goodId);
-        if (goods.getSurplusInventory() - 1 < 0) {
-            throw new OrderException("库存不足,订单创建失败");
-        }
-        /*更新商品库存*/
-        goods.setSurplusInventory(goods.getSurplusInventory() - 1);
-        try {
-            goodsService.updateInventory(goods);
-        } catch (Exception e) {
-            throw new OrderException("系统异常订单创建失败");
+        synchronized (goods) {
+            if (goods.getSurplusInventory() - 1 < 0) {
+                throw new OrderException("库存不足,订单创建失败");
+            }
+            /*先将用户加入参团表中*/
+            groupPurchaseService.joinGroup(order.getUser(), goods.getGroupPurchase());
+            /*更新商品库存*/
+            goods.setSurplusInventory(goods.getSurplusInventory() - 1);
+            try {
+                goodsService.updateInventory(goods);
+            } catch (Exception e) {
+                throw new OrderException("系统异常订单创建失败");
+            }
         }
         Long expId = order.getExpressDelivery().getId();
         ExpressDelivery expressDelivery = expressDeliveryDao.get(expId);
@@ -81,11 +84,10 @@ public class OrderServiceImpl implements OrderService {
         order.setGmtModified(DateUtil.getCurrentTimestamp());
         order.setOrderStatus(OrderStatus.ORDER_UNPAY.name());
         try {
-            orderDao.save(order);
+            return orderDao.save(order);
         } catch (Exception e) {
             throw new OrderException("订单创建失败,请重试");
         }
-        return true;
     }
 
     /**
@@ -100,8 +102,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> listUserOrders(User user, OrderStatus status, int page, int pageSize) throws OrderException {
         Map<String, Object> conditions = new HashMap<>();
-        conditions.put("userid", user.getId());
-        conditions.put("status", status);
+        if (status != null) {
+            conditions.put("userid", user.getId());
+            conditions.put("status", status.name());
+        } else {
+            conditions.put("userid", user.getId());
+        }
         List<Order> orderList = orderDao.searchPage(conditions, page, pageSize);
         if (orderList == null) {
             throw new OrderException("暂无相关订单");
@@ -316,5 +322,10 @@ public class OrderServiceImpl implements OrderService {
             // throw new OrderException("订单加载失败");
         }
         return orderList;
+    }
+
+    @Override
+    public Order searchOrderById(Long id) {
+        return orderDao.get(id);
     }
 }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,6 +13,7 @@ import java.sql.Timestamp;
  * 公告实体类
  */
 @Entity
+@Table(name = "announcement")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties({"gmtModified"})
@@ -33,6 +31,7 @@ public class Announcement implements Serializable {
     private String publisherNick;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

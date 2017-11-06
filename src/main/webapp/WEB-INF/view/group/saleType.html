@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>惠Go</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/style/saleType.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <span th:text="${saleTypeId}" id="saleTypeId" style="display: none"></span>
+    <my-header></my-header>
+
+    <!--内容主体-->
+    <row class="content-row">
+        <i-col class="content-col" :lg="{span:18,offset:3}">
+            <Breadcrumb>
+                <Breadcrumb-Item :href="url.router.index">
+                    <span style="color: #ff5e3f">
+                    <Icon type="ios-home-outline"></Icon>&nbsp;首页</span>
+                </Breadcrumb-Item>
+                <Breadcrumb-Item href="#">
+                    <span style="color: #ff5e3f">
+                        <Icon type="social-buffer-outline"></Icon>&nbsp;{{saleTypeName}}</span>
+                </Breadcrumb-Item>
+            </Breadcrumb>
+
+            <!--团购商品列表-->
+            <row class="groupList" v-if="groupList.length!=0">
+                <row :gutter="8">
+                    <i-col :lg="{span:4,offset:0}" :xs="{span:12}" v-for="group in groupList"
+                           :key="group.id">
+                        <div @click="routerToGroup(group.groupId)" class="groupItemDiv">
+                            <img :src="group.groupImg" style="height: 100%;width: 100%;"/>
+                            <p class="groupName">{{group.goodsName}}</p>
+                            <p><span class="price">¥&nbsp;{{group.groupPrice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color: grey;">原价:&nbsp;<s>{{group.originPrice}}</s></span></p>
+                            <p class="groupTime">团购时间:{{group.startDate}}</p>
+                        </div>
+                    </i-col>
+                </row>
+
+                <row type="flex" justify="center" style="margin-top: 10px">
+                    <Page :total="totalRecord" :page-size="pageSize" @on-change="pageChange"></Page>
+                </row>
+
+            </row>
+            <!--为空-->
+            <i-col v-if="groupList.length==0" :lg="{span:10,offset:7}">
+                <img :src="url.res.EmptySaleType" style="width: 100%;height: 100%;"/>
+                <p style="text-align: center;font-size: 25px;color:grey;">该分类下没有团购活动哦</p>
+            </i-col>
+
+        </i-col>
+
+    </row>
+
+    <my-footer></my-footer>
+    <back-top :right="10" :bottom="20"></back-top>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script type="text/javascript" src="/js/project/saleType.js"></script>
+</body>
+</html>

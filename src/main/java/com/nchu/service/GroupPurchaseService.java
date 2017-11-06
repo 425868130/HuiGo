@@ -24,7 +24,7 @@ public interface GroupPurchaseService {
      * @param groupPurchase 团购活动
      * @return 操作结果
      */
-    boolean createGroup(GroupPurchase groupPurchase);
+    boolean createGroup(GroupPurchase groupPurchase) throws GroupPurchaseException;
 
     /**
      * TODO 参与团购
@@ -110,5 +110,15 @@ public interface GroupPurchaseService {
      */
     List<GroupPurchase> topGroup(int top);
 
-    GroupPurchase getById(Long groupId);
+    GroupPurchase getById(Long groupId) throws GroupPurchaseException;
+
+    List<GroupPurchase> getGroupByUserId(long userId);
+
+    /*
+        * 根据主键Id获取团购信息*/
+    GroupPurchase get(Long id);
+
+    /*L
+        * 根据主键删除团购信息*/
+    void delGroupPurchase(Long id);
 }

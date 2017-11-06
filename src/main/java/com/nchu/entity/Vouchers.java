@@ -14,6 +14,7 @@ import java.sql.Timestamp;
  * 优惠券表实体类
  */
 @Entity
+@Table(name = "vouchers")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties({"user", "gmtModified"})
@@ -37,6 +38,7 @@ public class Vouchers implements Serializable {
     private boolean isused;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Long getId() {
         return id;

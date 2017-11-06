@@ -30,6 +30,7 @@ public class ExpressDelivery implements Serializable {
     private BigDecimal price;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

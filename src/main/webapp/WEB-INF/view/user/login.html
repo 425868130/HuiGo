@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <!--如果页面需要响应式效果则此处的声明不可少-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
     <style>
         [v-cloak] {
             display: none;
@@ -50,7 +51,7 @@
         }
 
         .loginRow {
-            background-image: url('/img/back.jpg');
+            background-image: url('http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/LoginBackground.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             margin: 30px 0px 30px 0px;
@@ -63,7 +64,7 @@
     <!--顶部logo-->
     <row class="head-band">
         <i-col :lg="{span:1,offset:2}" :sm="{span:3,offset:1}" :md="{span:2,offset:1}" :xs="{span:6,offset:1}">
-            <a :href="url.router.index"> <img src="/img/logo.png" class="logoPic"/> </a>
+            <a :href="url.router.index"> <img :src="url.res.logoPic" class="logoPic"/> </a>
         </i-col>
         <i-col :lg="{span:5}" :sm="{span:5}" :md="{span:3}" :xs="{span:12,offset:1}">
             <h1>惠Go</h1>
@@ -71,37 +72,41 @@
     </row>
     <!--登录表单区-->
     <row class="loginRow">
-        <i-col :lg="{span:6,offset:15}" :xs=" {span:22,offset:1} ">
-            <i-form ref="formInline" :model="formInline" :rules="ruleInline">
-                <h2>会员登录</h2>
-                <form-item prop="account">
-                    <i-input type="text" v-model="formInline.account" placeholder="用户账号" size="large">
-                        <!--前置插入图标-->
-                        <Icon type="person" slot="prepend"></Icon>
-                    </i-input>
-                </form-item>
-                <form-item prop="password">
-                    <i-input type="password" v-model="formInline.password" placeholder="密码" size="large">
-                        <Icon type="locked" slot="prepend"></Icon>
-                    </i-input>
-                </form-item>
-                <form-item>
-                    <!--提交按钮-->
-                    <i-button type="error" long @click="handleSubmit('formInline')" class="loginButton">登录</i-button>
-                    <span class="reg-link">
+        <i-col>
+            <i-col :lg="{span:6,offset:15}" :xs=" {span:22,offset:1} ">
+                <i-form ref="formInline" :model="formInline" :rules="ruleInline">
+                    <h2>会员登录</h2>
+                    <form-item prop="account">
+                        <i-input type="text" v-model="formInline.account" placeholder="用户账号" size="large">
+                            <!--前置插入图标-->
+                            <Icon type="person" slot="prepend"></Icon>
+                        </i-input>
+                    </form-item>
+                    <form-item prop="password">
+                        <i-input type="password" v-model="formInline.password" placeholder="密码" size="large"
+                                 v-on:on-enter="handleSubmit('formInline')">
+                            <Icon type="locked" slot="prepend"></Icon>
+                        </i-input>
+                    </form-item>
+                    <form-item>
+                        <!--提交按钮-->
+                        <i-button type="error" long @click="handleSubmit('formInline')" class="loginButton">登录
+                        </i-button>
+                        <span class="reg-link">
                         <a :href="url.router.vipReg">会员注册</a>&nbsp;
                         <a :href="url.router.businessReg">商家注册</a>
                     </span>
-                </form-item>
-            </i-form>
+                    </form-item>
+                </i-form>
+            </i-col>
         </i-col>
     </row>
     <my-footer style="margin-top: 100px"></my-footer>
 </div>
 
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
 <script type="text/javascript" src="/js/project/webRouter.js"></script>
 <script type="text/javascript" src="/js/project/footer.js"></script>
 <script type="text/javascript" src="/js/project/login.js"></script>

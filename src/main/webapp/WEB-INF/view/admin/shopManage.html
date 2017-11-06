@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>惠Go</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <h3>店铺管理</h3>
+    <Tabs v-model="tabName">
+        <Tab-Pane label="正常" name="tb1">
+            <i-table border :columns="tableColumns" :data="ShopList"></i-table>
+        </Tab-Pane>
+        <Tab-Pane label="已封禁" name="tb2">
+            <i-table border :columns="tableColumns" :data="ShopList"></i-table>
+        </Tab-Pane>
+    </Tabs>
+
+    <row type="flex" justify="center" style="margin-top: 20px;padding-bottom:20px;background-color: white"
+         v-if="ShopList.length>0">
+        <page :page-size="pageSize" :total="totalRecord" @on-change="pageChange"></page>
+    </row>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="/js/project/webRouter.js"></script>
+<script type="text/javascript" src="/js/project/shopManager.js"></script>
+
+</body>
+</html>

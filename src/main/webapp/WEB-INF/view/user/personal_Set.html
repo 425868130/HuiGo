@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/style/mystyle.css" rel="stylesheet"/>
+    <title>Insert title here</title>
+</head>
+<body>
+<div class="navbar navbar-default " role="navigation" style="padding-left:20px;margin-bottom:0px">
+    <div class="flexbox">
+        <label class="navbar-text " id="Hello"></label>
+        <button class="btn btn-link btn-md">消息（0）</button>
+        <button class="btn btn-link btn-md col-md-1 col-md-offset-3" onclick="window.location.href='/index'">惠Go网首页
+        </button>
+        <button class="btn btn-link btn-md col-md-1">我的惠Go</button>
+        <button class="btn btn-link btn-md col-md-1">个人中心</button>
+        <button class="btn btn-link btn-md col-md-1">收藏夹</button>
+        <button class="btn btn-link btn-md col-md-1">商品分类</button>
+        <button class="btn btn-link btn-md col-md-1" onclick="window.location.href='/user/businessInfoManage'">卖家中心
+        </button>
+        <button class="btn btn-link btn-md col-md-1">联系客服</button>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel panel-heading  flexbox" style="background:#FF0033 ">
+        <h1 class="col-md-2  text-left">我的惠Go</h1>
+        <a href="/personal_Order" class="btn btn-link btn-lg col-md-1" style="color:black">订单管理</a>
+        <a href="/personal_Set" class="btn btn-link btn-lg col-md-1" style="color:black">账户设置</a>
+        <a href="##" class="btn btn-link btn-lg col-md-1" style="color:black">消息</a>
+        <div class="col-md-3 col-md-offset-3">
+            <form action="##" class="navbar-form " rol="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入关键词"/>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+    </div>
+    <div class=" panel-body row" style="padding:0">
+        <ul class="list-unstyled">
+            <li class="col-md-2">
+                <div class="panel panel-default ">
+                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:15px">
+                        <li><img id="myHeadPortrait" src="" style="margin-top:5px;height: 88%; width: 44%"></li>
+                        <li><h4>账户设置</h4></li>
+                        <li><a href="/personal_Set">安全设置</a></li>
+                        <li><a href="/personal_Information">个人资料</a></li>
+                        <li><a href="/personal_Address">收货地址</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-md-10">
+                <div class="panel panel-default col-md-10">
+                    <div class="form-group row flexboxText">
+                        <h4 class="col-md-3">您的基础信息</h4>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2">会员名</h5><label><h5 id="txt_nickName"></h5></label>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2">邮箱：</h5><label><h5 id="txt_email"></h5></label>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2">绑定手机：</h5><label><h5 id="txt_telephone"></h5></label>
+                    </div>
+                    <div class="page-header"></div>
+                    <div class="form-group row flexboxText">
+                        <h4 class="col-md-4">您的安全服务</h4>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2 ">登录密码</h5>
+                        <h5 class="col-md-7">安全性高的密码可以使账号更安全。建议您定期更换密码，且设置一个包含数字和字母，并长度超过6位以上的密码。</h5>
+                        <a href="##" class="col-md-1" data-toggle="modal" data-target="#myModal_modifyPassword"><h5>
+                            修改</h5></a>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2">密保问题</h5>
+                        <h5 class="col-md-7">是您找回登录密码的方式之一。建议您设置一个容易记住，且最不容易被他人获取的问题及答案，更有效保障您的密码安全。</h5>
+                        <a href="##" class="col-md-1"><h5>设置</h5></a>
+                    </div>
+                    <div class="form-group row flexboxText">
+                        <h5 class="col-md-2 ">绑定手机</h5>
+                        <h5 class="col-md-7">绑定手机后，您即可享受淘宝丰富的手机服务，如手机找回密码等。</h5>
+                        <a href="##" class="col-md-1" data-toggle="modal" data-target="#myModal_bindPhone"><h5>绑定</h5>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class=" panel-footer row">
+        <div class="col-md-12">
+            <div class="col-md-1 col-md-offset-4 text-center">
+                <ul class="list-unstyled">
+                    <li><label>关于惠Go网</label>
+                    <li>
+                        <button class="btn btn-link" type="button">帮助中心</button>
+                    <li>
+                        <button class="btn btn-link" type="button">诚聘英才</button>
+                    <li>
+                        <button class="btn btn-link" type="button">法律声明</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>买家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线答疑</button>
+                    <li>
+                        <button class="btn btn-link" type="button">服务保障</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>卖家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线咨询</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商品报名</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商家规则</button>
+                    <li>
+                        <button class="btn btn-link" type="button">规则通知</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>有话要说</label>
+                    <li>
+                        <button class="btn btn-link" type="button">客服热线</button>
+                    <li>
+                        <button class="btn btn-link" type="button">廉政举报</button>
+                    <li>
+                        <button class="btn btn-link" type="button">我要投诉</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>服务保障</label>
+                    <li>
+                        <button class="btn btn-link" type="button">七天无理由退换货</button>
+                    <li>
+                        <button class="btn btn-link" type="button">维修/保养</button>
+                    <li>
+                        <button class="btn btn-link" type="button">购买延保服务</button>
+                    <li>
+                        <button class="btn btn-link" type="button">退换货政策</button>
+                </ul>
+            </div>
+        </div>
+        <p>&nbsp;
+        <p>&nbsp;
+            <div class="col-md-12">
+                <div class="row text-center">
+                    <a>关于网站</a>&nbsp;
+                    <a>帮助中心</a>&nbsp;
+                    <a>开放平台</a>&nbsp;
+                    <a>招聘信息</a>&nbsp;
+                    <a>联系我们</a>&nbsp;
+                    <a>网站合作</a>&nbsp;
+                    <a>法律声明及隐私权政策</a>&nbsp;
+                    <a>知识产权</a>&nbsp;
+                    <a>廉政举报</a>&nbsp;
+                </div>
+        <p>&nbsp;
+        <div class="row text-center">
+            <label>增值电信业务经营许可证：xxx-xxxx</label>
+            <label>网络文化经营许可证：xxx-xxxx</label>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade " id="myModal_modifyPassword" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel_modifyPassword" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel_modifyPassword">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <h4>原始密码：</h4>
+                <input class="form-control" id="old_password" type="password">
+                <h4>新密码：</h4>
+                <input class="form-control" id="new_password" type="password">
+                <h4>确认密码：</h4>
+                <input class="form-control" id="check_password" type="password">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_closePassword">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="modifyPassword()">确认修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade " id="myModal_bindPhone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_bindPhone"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel_bindPhone">绑定手机</h4>
+            </div>
+            <div class="modal-body">
+                <h4>新手机：</h4>
+                <input type="text" class="form-control" id="new_telephone">
+                <h4>确认新手机：</h4>
+                <input type="text" class="form-control" id="check_telephone">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_closeTelephone">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="bindTelephone()">确认绑定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    //新增
+    var userAccount;
+
+    //新增
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    //修改
+    $(function () {
+        //新增
+        userAccount = getCookie("account");
+        $.ajax({
+            type: "GET", //方法类型
+            url: "/user/info/" + userAccount + "",//请求地址
+            dataType: "json", //数据类型
+            success: function (data) {
+                $("#Hello").html("Hi，" + data.nickName);
+                $("#txt_nickName").html(data.nickName);
+                $("#txt_email").html(data.email);
+                $("#txt_telephone").html(data.telephone);
+                $("#myHeadPortrait").attr("src", data.headportrait);
+            }
+        });
+    });
+
+    //修改
+    function modifyPassword() {
+        var oldPassword = $("#old_password").val();
+        var newPassword = $("#new_password").val();
+        var checkPassword = $("#check_password").val();
+        if (newPassword == checkPassword) {
+            $.ajax({
+                type: "GET", //方法类型
+                url: "user/modify_password/" + userAccount + "",//新增
+                data: {
+                    "oldPassword": oldPassword,
+                    "newPassword": newPassword
+                },
+                success: function (data) {
+                    if (data != "") {
+                        $("#old_password").val("");
+                        $("#new_password").val("");
+                        $("#check_password").val("");
+                        $("#btn_closePassword").click();
+                    }
+                    else {
+                        alert("原始密码错误");
+                    }
+                },
+                error: function () {
+                    alert("修改密码失败");
+                }
+            });
+        }
+        else {
+            alert("输入新密码不相同，请再次输入");
+        }
+    }
+
+    //修改
+    function bindTelephone() {
+        var newTelephone = $("#new_telephone").val();
+        var checkTelephone = $("#check_telephone").val();
+        if (newTelephone == checkTelephone) {
+            $.ajax({
+                type: "GET", //方法类型
+                url: "user/bind_telephone/" + userAccount + "",//新增
+                data: {
+                    "newTelephone": newTelephone,
+                },
+                success: function (data) {
+                    if (data != "") {
+                        $("#new_telephone").val("");
+                        $("#check_telephone").val("");
+                        $("#txt_telephone").html(data.telephone);
+                        $("#btn_closeTelephone").click();
+                    }
+                    else {
+                        alert("原始手机错误");
+                    }
+                },
+                error: function () {
+                    alert("绑定手机失败");
+                }
+            });
+        }
+        else {
+            alert("两次输入手机不相同，请再次确认");
+        }
+    }
+</script>
+</body>
+</html>

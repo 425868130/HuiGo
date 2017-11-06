@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>惠Go</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
-    <style>
-
-    </style>
 </head>
 <body>
-
-<p th:text="${msg}" style="color: red"></p>
-<a href="/user/login">返回登录</a>
+<div id="app">
+    <div style="width: 60%;margin-left: 20%;margin-top: 5%">
+        <img :src="url.res.logoPic" style="width: 170px;height: auto"/><span
+            style="font-size: 25px;color: red">欢迎加入惠Go网</span>
+        <p th:text="${msg}" style="color: red;font-size: 20px;text-align: center"></p>
+        <a :href="url.router.login" style="font-size: 17px;margin-top:140px;text-align: center">返回登录</a>
+    </div>
 </div>
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
-<script type="text/javascript" src="/js/project/webRouter.js"></script>
-<script type="text/javascript" src="/js/project/footer.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+<script type="text/javascript" src="js/project/webRouter.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            url: routerUrl
+        },
+    });
+</script>
 </body>
 </html>

@@ -14,8 +14,12 @@ var app = new Vue({
         shopList: [],
         indexPage: 1,
         pageSize: 50,
+        /*总记录条数*/
+        totalRecord: 0,
         /*总页数*/
-        pageCount: 1
+        pageCount: 1,
+        visiable: false,
+        Announce: ''
     },
     methods: {
         search: function () {
@@ -33,13 +37,38 @@ var app = new Vue({
         },
         /*跳转到对应的商品详情页*/
         routerToGroup: function (groupId) {
-            Ajx.get(routerUrl.get.groupInfo + "/" + groupId);
-            VRouter(routerUrl.router.groupInfo);
+            Ajx.get(routerUrl.get.toGroupInfoPage + "/" + groupId).then(function () {
+                VRouter(routerUrl.router.groupInfo);
+            }).catch(function () {
+                VRouter(routerUrl.router.groupInfo);
+            });
         },
         /*跳转到商家详情页*/
         goToShopInfo: function (shopid) {
-            Ajx.get(routerUrl.get.shopInfo + "/" + shopid);
-            VRouter(routerUrl.router.shopInfo);
+            Ajx.get(routerUrl.get.saveParams, {
+                params: {
+                    paramsName: 'shopInfoId',
+                    value: shopid
+                }
+            }).then(function () {
+                VRouter(routerUrl.router.shopInfo);
+            });
+        },
+        /*点击团购分类项目,name为团购分类id*/
+        saleTypeClick: function (name) {
+            Ajx.get(routerUrl.get.saveSaleTypeParam, {
+                params: {
+                    saleTypeId: name
+                }
+            }).then(function (response) {
+                VRouter(routerUrl.router.saleTypePage);
+            });
+        },
+        /*页面变化*/
+        pageChange: function (page) {
+            /*修改页码*/
+            this.indexPage = page;
+            getIndexGroup(this);
         }
     },
     /*组件创建时的回调函数,在此完成数据的异步加载*/
@@ -49,13 +78,12 @@ var app = new Vue({
             getLoginUser(),
             hotGroup(),
             getSaleType(),
-            getIndexGroup(),
-            groupListPageAccount(),
-            getShopList()
+            getIndexGroup(this),
+            getShopList(),
+            getAnnounce()
         ]);
     },
     mounted: function () {
-
     }
 });
 
@@ -79,7 +107,6 @@ function hotGroup() {
             app.hotGroupList.push(group);
         });
     }).catch(function () {
-
     });
 }
 
@@ -95,21 +122,25 @@ function getSaleType() {
 }
 
 /*获取团购列表*/
-function getIndexGroup() {
+function getIndexGroup(appThis) {
     return Ajx.get(routerUrl.get.indexGroupList, {
         params: {
-            page: 1,
-            pageSize: 50
+            page: appThis.indexPage,
+            pageSize: appThis.pageSize,
+            totalRecord: appThis.totalRecord
         }
     }).then(function (response) {
-        response.data.forEach(function (group) {
+        /*先清空数组在将新页面数据加入*/
+        appThis.groupList = [];
+        response.data.dataList.forEach(function (group) {
             app.groupList.push(group);
-        })
+        });
+        appThis.totalRecord = response.data.totalRecord;
     });
 }
 
 /*获取总页码*/
-function groupListPageAccount() {
+/*function groupListPageAccount() {
     return Ajx.get(routerUrl.get.groupListPageAccount, {
         params: {
             pageSize: 50
@@ -117,7 +148,7 @@ function groupListPageAccount() {
     }).then(function (response) {
         app.pageCount = response.data;
     })
-}
+}*/
 
 /*获取推荐商家*/
 function getShopList() {
@@ -128,6 +159,16 @@ function getShopList() {
     }).then(function (response) {
         response.data.forEach(function (shop) {
             app.shopList.push(shop);
+            /*防止部分组件提前加载造成页面闪烁*/
+            app.visiable = true;
         })
+    }).catch(function () {
+        app.visiable = true;
     });
+}
+
+function getAnnounce() {
+    Ajx.get(routerUrl.get.getAnnounce).then(function (response) {
+        app.Announce = response.data
+    })
 }

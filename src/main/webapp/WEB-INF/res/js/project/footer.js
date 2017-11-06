@@ -6,9 +6,11 @@
 Vue.component(
     'my-footer',
     {
-        template: '<div style="background-color: #f8f8f9;margin-top: 50px">\n' +
-        '    <row class="footer">\n' +
-        '        <i-col :lg="{span:7,offset:9}" :xs="{span:13,offset:6}">\n' +
+        template:
+        '<div style="background-color: #f8f8f9;margin-top: 50px;max-height: 80px;">\n' +
+        '<div style="border: solid 1px #e9eaec;width: 90%;margin-left: 5%"></div>' +
+        '    <row class="footer" type="flex" justify="center">\n' +
+        '        <i-col>\n' +
         '            <a style="color: #80848f">关于网站</a>&nbsp;\n' +
         '            <a style="color: #80848f">帮助中心</a>&nbsp;\n' +
         '            <a style="color: #80848f">开放平台</a>&nbsp;\n' +
@@ -21,13 +23,5 @@ Vue.component(
         '        <i-col :lg="{span:7,offset:10}" :xs="{span:13,offset:6}" style="color: #80848f">Copyright © 2017 &nbsp;&nbsp; 版权所有 NCHU</i-col>\n' +
         '    </row>\n' +
         '</div>'
-        /* beforeCreate: function () {
-             var temp = this;
-             Ajx.get('footer.html', {responseType: 'text'}).then(function (response) {
-                 temp.footerHTML = response.data;
-             }).catch(function (error) {
-                 return '<p>加载失败</p>'
-             });
-         }*/
     }
 )

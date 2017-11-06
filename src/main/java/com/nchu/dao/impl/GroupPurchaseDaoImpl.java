@@ -177,9 +177,12 @@ public class GroupPurchaseDaoImpl implements GroupPurchaseDao {
         }
 
         Query query = session.createQuery(hql);
-        int startIndex = (page - 1) * pageSize;
-        query.setFirstResult(startIndex);
-        query.setMaxResults(pageSize);
+        if (pageSize != -1) {
+            int startIndex = (page - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+        }
+
         List<GroupPurchase> list = query.list();
         return list;
     }
@@ -215,9 +218,11 @@ public class GroupPurchaseDaoImpl implements GroupPurchaseDao {
         }
 
         Query query = session.createQuery(hql);
-        int startIndex = (page - 1) * pageSize;
-        query.setFirstResult(startIndex);
-        query.setMaxResults(pageSize);
+        if (pageSize != -1) {
+            int startIndex = (page - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+        }
         List<GroupPurchase> list = query.list();
         return list;
     }
@@ -276,6 +281,14 @@ public class GroupPurchaseDaoImpl implements GroupPurchaseDao {
         query.setTimestamp("now", DateUtil.getCurrentTime());
         query.setFirstResult(0);
         query.setMaxResults(top);
+        return query.list();
+    }
+
+    /* 根据用户Id 查询团购信息 */
+    @Override
+    public List<GroupPurchase> getGroupByUserId(long userId) {
+        String hql = "from GroupPurchase gp where gp.userid=:userId";
+        Query query = getSession().createQuery(hql);
         return query.list();
     }
 

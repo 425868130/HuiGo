@@ -48,5 +48,7 @@ public interface FavoriteService {
      * @param pageSize 页面大小
      * @return 操作结果
      */
-    boolean getAllFavorite(User user, int page, int pageSize);
+    List<Favorites> getAllFavorite(User user, int page, int pageSize);
+
+    Favorites getFavoritesById(Long favoritesId);
 }

@@ -48,7 +48,11 @@ public class UserSessionServiceImpl implements UserSessionService {
      */
     @Override
     public void removeUser(HttpServletRequest request) {
-        userService.logout((User) request.getSession().getAttribute(SESSION_FLAG));
+        User user = (User) request.getSession().getAttribute(SESSION_FLAG);
+        if (user == null) {
+            return;
+        }
+        userService.logout(user);
         request.getSession().removeAttribute(SESSION_FLAG);
         currentSession(request).invalidate();
     }

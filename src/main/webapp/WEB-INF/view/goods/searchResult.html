@@ -1,30 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>惠Go</title>
+    <title>[惠Go]搜索结果</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
-    <style>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/style/searchResult.css">
 
-    </style>
 </head>
 <body>
-<div id="app">
-    <row>
-        <i-col>
-            搜索结果页
+<div id="app" v-cloak>
+    <!--采用服务器渲染时可以通过thymeleaf渲染关键词到此处,通过vue读取然后异步获取搜索结果-->
+    <span style="display:none;" th:text="${goodsKeyWords}" id="keyWords"></span>
+
+    <my-header :key-words="goodsKeyWords"></my-header>
+    <row class="contentRow">
+
+        <i-col :lg="{span:18,offset:3}" :xs="{span:24}" class="contentCol">
+            <h1 style="width: 100%;color: #495060">搜索结果&nbsp;&nbsp;
+                <span style="font-size: 13px;color: #80848f">&nbsp;&nbsp;共有&nbsp;{{resultList.length}}条结果</span>
+            </h1>
+            <row class="listRow" :gutter="16">
+                <!--如果没有搜索结果则显示没有结果的提示-->
+                <row v-if="resultList.length == 0" type="flex" align="middle" justify="center"
+                     style="background-color: white">
+                    <i-col>
+                        <img :src="url.res.EmptySearch"/>
+                    </i-col>
+                </row>
+                <i-col :lg="{span:5}" :xs="{span:11,offset:1}" v-for="goods in resultList" :key="goods.id"
+                       class="goodsItem">
+                    <div style="width: 100%;height: 100%" @click="toGoodsInfo(goods.id)">
+                        <img :src="goods.picture" style="width: 100%;height:100%">
+                    </div>
+                    <h4 v-text="goods.name" class="goodsTitle"></h4>
+                    <p><span class="price">¥&nbsp;{{goods.preferentialprice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="color: grey;">原价:&nbsp;<s>{{goods.originalprice}}</s></span></p>
+                </i-col>
+            </row>
 
         </i-col>
     </row>
 
     <my-footer></my-footer>
+    <back-top :right="10" :bottom="20"></back-top>
 </div>
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
 <script type="text/javascript" src="/js/project/webRouter.js"></script>
-<script type="text/javascript" src="/js/project/footer.js"></script>
+<script type="text/javascript" src="/js/project/fragment.js"></script>
+<script type="text/javascript" src="/js/project/searchResult.js"></script>
 </body>
 </html>

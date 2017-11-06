@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 2017-9-24 15:46:29
@@ -216,6 +218,11 @@ public class ShopServiceImpl implements ShopService {
         return saleTypeDao.listAll();
     }
 
+    @Override
+    public Saletype getSaleTypeById(Long id) {
+        return saleTypeDao.get(id);
+    }
+
     /**
      * 查询全部数据记录
      *
@@ -224,5 +231,19 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<Shop> listAll() {
         return shopDao.listAll();
+    }
+
+    /**
+     * 获取所有未审核的店铺
+     */
+    @Override
+    public List<Shop> listAllUncheck() {
+        String hql = "from Shop where isVerify = 0";
+        return shopDao.searchListDefined(hql);
+    }
+
+    @Override
+    public void update(Shop shop) {
+        shopDao.update(shop);
     }
 }

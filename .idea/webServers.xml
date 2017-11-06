@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="41dc9088-04ea-436f-896e-c7f428ccf9ce" name="阿里云" url="http://120.24.238.61">
+        <fileTransfer host="120.24.238.61" port="22" rootFolder="/usr/local/webapp" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

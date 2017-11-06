@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  * 商品评价表实体类
  */
 @Entity
+@Table(name = "evaluation")
 @DynamicInsert
 @DynamicUpdate
 @JsonIgnoreProperties({"user", "goods", "gmtModified"})
@@ -52,6 +53,7 @@ public class Evaluation implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

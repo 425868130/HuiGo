@@ -35,7 +35,7 @@ public class EmailServiceImpl implements EmailService {
     /*邮件模板路径前缀*/
     final static String PREFIX = "mailTemplate/";
     /*主机前缀*/
-    final static String SERVERHOST = "http://localhost/";
+    final static String SERVERHOST = "http://localhost";
     /*创建可缓存线程池,由于邮件发送执行速度慢,为了不影响系统响应速度,需要用在后台线程发送邮件*/
     static ExecutorService pool = Executors.newCachedThreadPool();
 
@@ -122,7 +122,7 @@ public class EmailServiceImpl implements EmailService {
             Context context = new Context();
         /*填充模板变量*/
             Map<String, Object> map = new HashMap<>();
-            String href = SERVERHOST + "user/userAuthentication?action=activate&account=" + recipients.getAccount() +
+            String href = SERVERHOST + "/user/userAuthentication?action=activate&account=" + recipients.getAccount() +
                     "&email=" + recipients.getEmail() + "&checkCode=" + recipients.getCheckcode();
 
             map.put("userAccount", recipients.getAccount());

@@ -30,6 +30,8 @@ public interface AnnounceService {
      */
     List<Announcement> listAll(int page, int pageSize);
 
+    List<Announcement> listAll();
+
     /**
      * TODO 删除公告
      * 验证操作人为管理员
@@ -41,4 +43,5 @@ public interface AnnounceService {
     boolean deleteAnnouncement(Announcement announcement, User operator) throws AnnouncementException;
 
 
+    void addAnnounceMent(Announcement announcement);
 }

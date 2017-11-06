@@ -95,5 +95,11 @@ public interface ShopService {
      */
     List<Saletype> getAllSaleType();
 
+    Saletype getSaleTypeById(Long id);
+
     List<Shop> listAll();
+
+    List<Shop> listAllUncheck();
+
+    void update(Shop shop);
 }

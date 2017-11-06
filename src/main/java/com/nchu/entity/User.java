@@ -1,10 +1,12 @@
 package com.nchu.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -16,8 +18,10 @@ import java.util.Set;
  * 用户表对应实体类
  */
 @Entity
+@Table(name = "user")
 /*配置转换为json对象时要忽略的属性,防止hibernate触发懒加载导致递归查询*/
-@JsonIgnoreProperties({"favorites", "orders", "participateGroups", "msgBox", "sendMsgBox", "vouchers", "idCard", "gmtCreate", "gmtModified"})
+@JsonIgnoreProperties({
+        "password", "receivingAddress", "favorites", "orders", "participateGroups", "msgBox", "sendMsgBox", "vouchers", "idCard", "gmtCreate", "gmtModified"})
 @DynamicInsert
 @DynamicUpdate
 public class User implements Serializable {
@@ -158,7 +162,6 @@ public class User implements Serializable {
     @Basic
     @Column(name = "password", length = 25)
     /*忽略password字段防止密码泄露到前端,但是不忽略set方法,使前端密码可以传到后端*/
-    //@JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -397,13 +400,6 @@ public class User implements Serializable {
         result = 31 * result + (checkcode != null ? checkcode.hashCode() : 0);
         result = 31 * result + (isVerification ? 1 : 0);
         result = 31 * result + (isLogin ? 1 : 0);
-        result = 31 * result + (receivingAddress != null ? receivingAddress.hashCode() : 0);
-        result = 31 * result + (favorites != null ? favorites.hashCode() : 0);
-        result = 31 * result + (orders != null ? orders.hashCode() : 0);
-        result = 31 * result + (participateGroups != null ? participateGroups.hashCode() : 0);
-        result = 31 * result + (MsgBox != null ? MsgBox.hashCode() : 0);
-        result = 31 * result + (SendMsgBox != null ? SendMsgBox.hashCode() : 0);
-        result = 31 * result + (vouchers != null ? vouchers.hashCode() : 0);
         return result;
     }
 }

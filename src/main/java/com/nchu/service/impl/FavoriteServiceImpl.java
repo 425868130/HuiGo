@@ -32,6 +32,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public boolean addFavorite(Favorites favorites, User user) throws FavoritesException {
         user = userDao.get(user.getId());
+        /*判断商品是否已经添加到收藏夹*/
+        if (user.getFavorites().stream().filter(favor -> favor.getGoods().getId() == favorites.getGoods().getId()).count() > 0) {
+            throw new FavoritesException("该商品已经添加到收藏夹,请勿重复操作");
+        }
         favorites.setUser(user);
         try {
             favoritesDao.save(favorites);
@@ -90,11 +94,19 @@ public class FavoriteServiceImpl implements FavoriteService {
      * @return 操作结果
      */
     @Override
-    public boolean getAllFavorite(User user, int page, int pageSize) {
+    public List<Favorites> getAllFavorite(User user, int page, int pageSize) {
         Map<String, Object> conditions = new HashMap<>();
         conditions.put("userid", user.getId());
-        favoritesDao.searchPage(conditions, page, pageSize);
-        return true;
+        return favoritesDao.searchPage(conditions, page, pageSize);
     }
 
+    /**
+     * TODO 查询用户的收藏夹
+     *
+     * @return 操作结果
+     */
+    @Override
+    public Favorites getFavoritesById(Long favoritesId) {
+        return favoritesDao.get(favoritesId);
+    }
 }

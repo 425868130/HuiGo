@@ -1,0 +1,153 @@
+.contentRow {
+    margin-top: 10px;
+}
+
+.contentCol {
+    /*  background-color: white;*/
+}
+
+.group-title {
+    margin-top: 2%;
+    background-color: white;
+}
+
+.goodsInfo-evaluate {
+    margin-top: 20px;
+    background-color: white;
+}
+
+.group-title h1 {
+    font-size: 25px;
+}
+
+.group-title p {
+    margin-top: 5px;
+}
+
+.group-description {
+    font-size: 15px;
+    color: rgba(254, 0, 0, 0.85);
+}
+
+/*商品详细描述*/
+.goodsDescription {
+    color: #bbbec4;
+    width: 95%;
+    margin-top: 10px;
+}
+
+.group-startTime {
+    color: #ff9900;
+    font-size: 17px;
+    width: auto;
+}
+
+.express {
+    color: #80848f;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+/*参团按钮*/
+.joinBar {
+    background-color: #E61414;
+    margin-top: 20px;
+}
+
+.joinBar p {
+    color: white;
+    margin-left: 10px;
+    width: 50%;
+}
+
+.joinBar .original-price {
+    font-size: 17px;
+}
+
+.joinBar .preferential-price {
+    font-size: 30px;
+}
+
+.inventory {
+    font-size: 15px;
+    color: #80848f;
+    margin-top: 10px;
+}
+
+/*参团按钮*/
+.joinButton {
+    color: #eb0000;
+    font-size: 27px;
+    float: right;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    margin-right: 10px;
+    height: 55px;
+    box-shadow: 1px 1px 2px #a70000, -1px -1px 2px #910000;
+}
+
+/*团购未开始*/
+.group-unStart {
+    background-color: #19be6b;
+    color: white;
+    font-size: 27px;
+}
+
+/*团购有效时的参团按钮样式*/
+.group-start {
+    background-color: #FEE97D;
+}
+
+/*团购无效时的样式*/
+.group-invalid {
+    background-color: #bbbec4;
+    color: #495060;
+}
+
+.joinButton:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #9f944b, -1px -1px 1px #8e8443;
+}
+
+/*参团人数*/
+.numberPart {
+    color: red;
+    font-size: 17px;
+    float: right;
+}
+
+.goods-description {
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    resize: none;
+    border: none;
+}
+
+.goods-description:focus {
+    outline: none;
+}
+
+.favor-share {
+
+}
+
+/*单个评论项目样式*/
+.evaluationLi {
+}
+
+.evaluationLi img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+}
+
+.eval-content {
+    margin-left: 80px;
+    margin-top: -55px;
+    min-height: 60px;
+    width: 80%;
+}

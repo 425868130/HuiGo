@@ -3,6 +3,7 @@ package com.nchu.service.impl;
 import com.nchu.dao.GoodsDao;
 import com.nchu.dao.GroupPurchaseDao;
 import com.nchu.dao.ParticipateGroupDao;
+import com.nchu.dao.UserDao;
 import com.nchu.entity.Goods;
 import com.nchu.entity.GroupPurchase;
 import com.nchu.entity.ParticipateGroup;
@@ -12,10 +13,7 @@ import com.nchu.exception.GoodsException;
 import com.nchu.exception.GroupPurchaseException;
 import com.nchu.service.GroupPurchaseService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +31,8 @@ public class GroupPurchaseServiceImpl implements GroupPurchaseService {
     ParticipateGroupDao participateGroupDao;
     @Autowired
     GoodsDao goodsDao;
+    @Autowired
+    UserDao userDao;
 
     /**
      * TODO 创建团购活动
@@ -46,8 +46,13 @@ public class GroupPurchaseServiceImpl implements GroupPurchaseService {
      * @return 操作结果
      */
     @Override
-    public boolean createGroup(GroupPurchase groupPurchase) {
-        return false;
+    public boolean createGroup(GroupPurchase groupPurchase) throws GroupPurchaseException {
+        if (groupPurchaseDao.getByGoods(groupPurchase.getGoods()) == null) {
+            groupPurchaseDao.save(groupPurchase);
+        } else {
+            throw new GroupPurchaseException("该商品已经创建了团购活动");
+        }
+        return true;
     }
 
     /**
@@ -60,11 +65,25 @@ public class GroupPurchaseServiceImpl implements GroupPurchaseService {
      */
     @Override
     public boolean joinGroup(User user, GroupPurchase groupPurchase) throws GroupPurchaseException {
+        user = userDao.get(user.getId());
+        if (groupPurchase.getNumberPart() + 1 > groupPurchase.getMaxParticipants()) {
+            throw new GroupPurchaseException("已满最大参与人数,看看其他商品吧^_^");
+        }
+        /*判断用户是否已经参与该团购*/
+        if (user.getParticipateGroups().stream().filter(participateGroup -> participateGroup.getGroupPurchase().getId() == groupPurchase.getId()).count() > 0) {
+            throw new GroupPurchaseException("您已参与该团购,请勿重复操作!");
+        }
         try {
-            participateGroupDao.createParticipateGroup(user.getId(), groupPurchase.getId());
+            groupPurchase.setNumberPart(groupPurchase.getNumberPart() + 1);
+            groupPurchaseDao.save(groupPurchase);
+            ParticipateGroup participateGroup = new ParticipateGroup();
+            participateGroup.setUser(user);
+            participateGroup.setGroupPurchase(groupPurchase);
+            participateGroup.setIseffective(true);
+            participateGroupDao.save(participateGroup);
             return true;
         } catch (Exception e) {
-            throw new GroupPurchaseException("团购活动创建异常");
+            throw new GroupPurchaseException("系统异常,参团失败");
         }
     }
 
@@ -202,7 +221,34 @@ public class GroupPurchaseServiceImpl implements GroupPurchaseService {
      * @return
      */
     @Override
-    public GroupPurchase getById(Long groupId) {
-        return groupPurchaseDao.get(groupId);
+    public GroupPurchase getById(Long groupId) throws GroupPurchaseException {
+        GroupPurchase groupPurchase = groupPurchaseDao.get(groupId);
+        if (groupPurchase == null) {
+            throw new GroupPurchaseException("团购活动不存在!");
+        }
+        return groupPurchase;
     }
+
+    /**
+     * 根据用户ID查询团购列表
+     */
+    @Override
+    public List<GroupPurchase> getGroupByUserId(long userId) {
+        return groupPurchaseDao.getGroupByUserId(userId);
+    }
+
+    /*
+    * 根据主键Id获取团购信息*/
+    @Override
+    public GroupPurchase get(Long id) {
+        return groupPurchaseDao.get(id);
+    }
+
+    /*L
+    * 根据主键删除团购信息*/
+    @Override
+    public void delGroupPurchase(Long id) {
+        groupPurchaseDao.delete(id);
+    }
+
 }

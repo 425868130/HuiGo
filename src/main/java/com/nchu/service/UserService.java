@@ -131,4 +131,6 @@ public interface UserService {
      * @return 被冻结的用户列表
      */
     List<User> listLockUser(int page, int pageSize);
+
+    List<User> listUserByStatus(Boolean isLocked, String userType);
 }

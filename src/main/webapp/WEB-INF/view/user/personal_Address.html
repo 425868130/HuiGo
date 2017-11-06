@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/style/mystyle.css" rel="stylesheet"/>
-    <title>我的收货地址</title>
+    <title>Insert title here</title>
+
 </head>
 <body>
-<div class="navbar navbar-default" role="navigation" style="padding-left:20px;margin-bottom:0px">
-    <div>
-        <label class="navbar-text navbar-left" id="Hello">hi，xx用户</label>
-        <button class="btn btn-link btn-lg navbar-left">消息（0）</button>
-        <button class="btn btn-link btn-lg navbar-right" style="margin-right:100px">联系客服</button>
-        <button class="btn btn-link btn-lg navbar-right">卖家中心</button>
-        <button class="btn btn-link btn-lg navbar-right">商品分类</button>
-        <button class="btn btn-link btn-lg navbar-right">收藏夹</button>
-        <button class="btn btn-link btn-lg navbar-right">个人中心</button>
-        <button class="btn btn-link btn-lg navbar-right">我的惠Go</button>
-        <button class="btn btn-link btn-lg navbar-right">惠Go网首页</button>
+<div class="navbar navbar-default " role="navigation" style="padding-left:20px;margin-bottom:0px">
+    <div class="flexbox">
+        <label class="navbar-text " id="Hello"></label>
+        <button class="btn btn-link btn-md">消息（0）</button>
+        <button class="btn btn-link btn-md col-md-1 col-md-offset-3" onclick="window.location.href='/index'">惠Go网首页
+        </button>
+        <button class="btn btn-link btn-md col-md-1">我的惠Go</button>
+        <button class="btn btn-link btn-md col-md-1">个人中心</button>
+        <button class="btn btn-link btn-md col-md-1">收藏夹</button>
+        <button class="btn btn-link btn-md col-md-1">商品分类</button>
+        <button class="btn btn-link btn-md col-md-1" onclick="window.location.href='/user/businessInfoManage'">卖家中心
+        </button>
+        <button class="btn btn-link btn-md col-md-1">联系客服</button>
     </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel panel-heading row flexbox">
+    <div class="panel panel-heading  flexbox" style="background:#FF0033 ">
         <h1 class="col-md-2  text-left">我的惠Go</h1>
-        <a href="/person" class="btn btn-link btn-lg col-md-1">首页</a>
-        <a href="##" class="btn btn-link btn-lg col-md-1">账户设置</a>
-        <a href="##" class="btn btn-link btn-lg col-md-1">消息</a>
+        <a href="/personal_Order" class="btn btn-link btn-lg col-md-1" style="color:black">订单管理</a>
+        <a href="/personal_Set" class="btn btn-link btn-lg col-md-1" style="color:black">账户设置</a>
+        <a href="##" class="btn btn-link btn-lg col-md-1" style="color:black">消息</a>
         <div class="col-md-3 col-md-offset-3">
             <form action="##" class="navbar-form " rol="search">
                 <div class="form-group">
@@ -37,50 +40,34 @@
             </form>
         </div>
     </div>
-    <div class="panel panel-body row" style="padding:0">
+    <div class=" panel-body row" style="padding:0">
         <ul class="list-unstyled">
             <li class="col-md-2">
                 <div class="panel panel-default ">
-                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:20px">
-                        <li><img src="http://img.mukewang.com/5434eba100014fe906000338.png"
-                                 style="margin-top:5px;height: 88%; width: 44%"></li>
-                        <li><h2>账户设置</h2></li>
-                        <li><a href="/person">安全设置</a></li>
+                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:15px">
+                        <li><img id="myHeadPortrait" src="" style="margin-top:5px;height: 88%; width: 44%"></li>
+                        <li><h4>账户设置</h4></li>
+                        <li><a href="/personal_Set">安全设置</a></li>
                         <li><a href="/personal_Information">个人资料</a></li>
                         <li><a href="/personal_Address">收货地址</a></li>
-                        <li><a href="##">支付方式绑定设置</a></li>
                     </ul>
                 </div>
             </li>
             <li class="col-md-10">
                 <div class="panel panel-default">
                     <div class="form-group flexbox">
-                        <label for="addAddress" class="col-md-1 control-label ">收货地址：</label>
+                        <label for="addAddress" class="col-md-2 control-label ">收货地址：</label>
                         <button id="addAddress" class="btn btn-link" data-toggle="modal" data-target="#myModal_new">
                             新增收货地址
                         </button>
                     </div>
                     <div class="form-group flexbox">
-                        <ul class="col-md-12  list-unstyled">
+                        <ul class="col-md-12  list-unstyled" id="address_body">
                             <li class="row">
                                 <ul class="list-unstyled list-inline">
-                                    <li class="col-md-5 "><label><h4 id="txt_address">xx省xx市xx县</h4></label></li>
-                                    <li><a href="##" data-toggle="modal" data-target="#myModal_modify">修改</a></li>
-                                    <li><a href="##">删除</a></li>
-                                </ul>
-                            </li>
-                            <li class="row">
-                                <ul class="list-unstyled list-inline">
-                                    <li class="col-md-5 "><label><h4>xx省xx市xx县</h4></label></li>
-                                    <li><a href="##">修改</a></li>
-                                    <li><a href="##">删除</a></li>
-                                </ul>
-                            </li>
-                            <li class="row">
-                                <ul class="list-unstyled list-inline">
-                                    <li class="col-md-5 "><label><h4>xx省xx市xx县</h4></label></li>
-                                    <li><a href="##">修改</a></li>
-                                    <li><a href="##">删除</a></li>
+                                    <li class="col-md-3"><h4>收货人姓名</h4></li>
+                                    <li class="col-md-3"><h4>联系电话</h4></li>
+                                    <li class="col-md-3"><h4>收货地址</h4></li>
                                 </ul>
                             </li>
                         </ul>
@@ -89,7 +76,7 @@
             </li>
         </ul>
     </div>
-    <div class="panel panel-footer row">
+    <div class=" panel-footer row">
         <div class="col-md-12">
             <div class="col-md-1 col-md-offset-4 text-center">
                 <ul class="list-unstyled">
@@ -181,12 +168,16 @@
                 <h4 class="modal-title" id="myModalLabel_new">新增收货地址</h4>
             </div>
             <div class="modal-body">
+                <h3>收货人姓名：</h3>
+                <input type="text" class="form-control" id="new_name">
+                <h3>收货人电话：</h3>
+                <input type="text" class="form-control" id="new_telephone">
                 <h3>收货地址：</h3>
-                <input type="text" class="form-control" id="modify_address">
+                <input type="text" class="form-control" id="new_address">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确认添加</button>
+                <button type="button" class="btn btn-primary" onclick="addAddress()" data-dismiss="modal">确认添加</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -201,45 +192,159 @@
                 <h4 class="modal-title" id="myModalLabel_modify">修改收货地址</h4>
             </div>
             <div class="modal-body">
+                <h3>收货人姓名：</h3>
+                <input type="text" class="form-control" id="modify_name">
+                <h3>收货人电话：</h3>
+                <input type="text" class="form-control" id="modify_telephone">
                 <h3>收货地址：</h3>
                 <input type="text" class="form-control" id="modify_address">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_modify">提交更改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
 
-<script src="/js/jquery/jquery-3.1.1.min.js"></script>
-<script src="/js/bootstrap/bootstrap.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
+    var userId;
+    //新增
+    var userAccount;
+    var Id;
+
+    //新增
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    //修改
     $(function () {
-        var userAccount = "";
+        userAccount = getCookie("account");
         $.ajax({
             type: "GET", //方法类型
-            url: "user/info/SYSTEM",//请求地址
+            url: "user/info/" + userAccount + "",//请求地址		//新增
             dataType: "json", //数据类型
             success: function (data) {
                 $("#Hello").html("Hi，" + data.nickName);
-                userAccount = data.account;
-                getAddress(userAccount);
+                $("#myHeadPortrait").attr("src", data.headportrait);
+                //修改
+                getAddress();
+                userId = data.id;
             }
         });
-    })
+    });
 
-    function getAddress(userAccount) {
+    //修改
+    function getAddress() {
+        $("#address_body").empty();
         $.ajax({
             type: "GET", //方法类型
-            url: "user/express/" + userAccount + "",//请求地址
+            url: "user/receivingAddress/" + userAccount + "",//请求地址		//新增
             dataType: "json", //数据类型
             success: function (data) {
-                $("#txt_address").html(data[0]);
+                $("#address_body").append('<li class="row"><ul class="list-unstyled list-inline"><li class="col-md-3"><h4>收货人姓名</h4></li><li class="col-md-3"><h4>联系电话</h4></li><li class="col-md-3"><h4>收货地址</h4></li></ul></li>');
+                for (var i = 0; i < data.length; i++) {
+                    $("#address_body").append('<li class="row"><ul class="list-unstyled list-inline flexbox"><li class="col-md-3"><h5>' + data[i].name + '</h5></li><li class="col-md-3"><h5>' + data[i].tel + '</h5></li><li class="col-md-3 "><h5>' + data[i].address + '</h5></li><li><a class="Aa" href="##" data-toggle="modal" data-target="#myModal_modify">修改</a></li><li><a class="Dd" href="##">删除</a></li></ul></li>');
+                    $(".Aa").not("[id]").attr("id", "modify_" + data[i].id);
+                    $(".Dd").not("[id]").attr("id", "delete_" + data[i].id);
+                }
             }
         });
     }
+
+    function addAddress() {
+        var name = $("#new_name").val();
+        var address = $("#new_address").val();
+        var telephone = $("#new_telephone").val();
+        $.ajax({
+            type: "POST", //方法类型
+            url: "user/add_receivingAddress",//请求地址
+            dataType: "text",
+            data: {
+                "userId": userId,
+                "name": name,
+                "address": address,
+                "telephone": telephone
+            },
+            success: function () {
+                getAddress();
+                $("#new_name").val("");
+                $("#new_address").val("");
+                $("#new_telephone").val("");
+            }
+        });
+    }
+
+    $(document).on("click", ".Aa", function () {
+
+        Id = $(this).attr("id");
+        Id = Id.substring(7, Id.length);
+        $.ajax({
+            type: "GET", //方法类型
+            url: "user/getReceivingAddressById/" + Id + "",//请求地址
+            dataType: "json",
+            success: function (data) {
+                $("#modify_name").val(data.name);
+                $("#modify_telephone").val(data.tel);
+                $("#modify_address").val(data.address);
+            }
+        });
+        $("#btn_modify").click(
+            function () {
+                var Name = $("#modify_name").val();
+                var Address = $("#modify_address").val();
+                var Telephone = $("#modify_telephone").val();
+                $.ajax({
+                    type: "POST", //方法类型
+                    url: "user/modify_receivingAddress",//请求地址
+                    dataType: "text",
+                    data: {
+                        "id": Id,
+                        "name": Name,
+                        "address": Address,
+                        "telephone": Telephone
+                    },
+                    success: function () {
+                        //修改
+                        getAddress();
+                    }
+                });
+            });
+    });
+
+    $(document).on("click", ".Dd", function () {
+        Id = $(this).attr("id");
+        Id = Id.substring(7, Id.length);
+        var msg = "您确定要删除该地址吗？";
+        if (confirm(msg) == true) {
+            $.ajax({
+                type: "POST", //方法类型
+                url: "user/delete_receivingAddress",//请求地址
+                dataType: "text",
+                data: {
+                    "Id": Id
+                },
+                success: function () {
+                    //修改
+                    getAddress();
+                }
+            });
+        }
+    });
 </script>
 
 </body>

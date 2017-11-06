@@ -68,8 +68,10 @@ public class GoodsDaoImpl implements GoodsDao {
     public List<Goods> searchByNamePage(String keyword, int page, int pageSize) {
         String hql = "from Goods where name like '%%" + keyword + "%%'";
         Query query = getSession().createQuery(hql);
-        query.setFirstResult((1 - page) * pageSize);
-        query.setMaxResults(pageSize);
+        if (pageSize != -1) {
+            query.setFirstResult((1 - page) * pageSize);
+            query.setMaxResults(pageSize);
+        }
         return query.list();
     }
 
@@ -106,6 +108,7 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public void update(Goods model) {
         model.setGmtModified(DateUtil.getCurrentTimestamp());
+        model.setGmtCreate(DateUtil.getCurrentTimestamp());
         getSession().update(model);
     }
 
@@ -160,7 +163,7 @@ public class GoodsDaoImpl implements GoodsDao {
      */
     @Override
     public Goods get(Long id) {
-        Goods model = (Goods) getSession().get(AfterSale.class, id);
+        Goods model = (Goods) getSession().get(Goods.class, id);
         return model;
     }
 
@@ -193,7 +196,7 @@ public class GoodsDaoImpl implements GoodsDao {
      *
      * @param conditions 条件参数集合
      * @param page       页码
-     * @param pageSize   每页大小
+     * @param pageSize   每页大小 如果传入页面大小为-1表示查询全部
      * @return 查询结果集
      */
     @Override
@@ -216,9 +219,12 @@ public class GoodsDaoImpl implements GoodsDao {
         }
 
         Query query = session.createQuery(hql);
-        int startIndex = (page - 1) * pageSize;
-        query.setFirstResult(startIndex);
-        query.setMaxResults(pageSize);
+        /*如果传入页面大小为-1表示查询全部*/
+        if (pageSize != -1) {
+            int startIndex = (page - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+        }
         List<Goods> list = query.list();
         return list;
     }

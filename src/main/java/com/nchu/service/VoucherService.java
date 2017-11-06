@@ -17,7 +17,7 @@ public interface VoucherService {
      * @param vouchers 优惠券
      * @return 操作 结果
      */
-    boolean createVouchers(Vouchers vouchers);
+    boolean createVouchers(Vouchers vouchers) throws VouchersException;
 
     /**
      * TODO 通过id获取团购券

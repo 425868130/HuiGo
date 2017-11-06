@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/style/mystyle.css" rel="stylesheet"/>
+    <title>Insert title here</title>
+</head>
+<body>
+<div class="navbar navbar-default " role="navigation" style="padding-left:20px;margin-bottom:0px">
+    <div class="flexbox">
+        <label class="navbar-text " id="Hello"></label>
+        <button class="btn btn-link btn-md">消息（0）</button>
+        <button class="btn btn-link btn-md col-md-1 col-md-offset-3" onclick="window.location.href='/index'">惠Go网首页
+        </button>
+        <button class="btn btn-link btn-md col-md-1">我的惠Go</button>
+        <button class="btn btn-link btn-md col-md-1">个人中心</button>
+        <button class="btn btn-link btn-md col-md-1">收藏夹</button>
+        <button class="btn btn-link btn-md col-md-1">商品分类</button>
+        <button class="btn btn-link btn-md col-md-1" onclick="window.location.href='/user/businessInfoManage'">卖家中心
+        </button>
+        <button class="btn btn-link btn-md col-md-1">联系客服</button>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel panel-heading  flexbox" style="background:#FF0033 ">
+        <h1 class="col-md-2  text-left">我的惠Go</h1>
+        <a href="/personal_Order" class="btn btn-link btn-lg col-md-1" style="color:black">订单管理</a>
+        <a href="/personal_Set" class="btn btn-link btn-lg col-md-1" style="color:black">账户设置</a>
+        <a href="##" class="btn btn-link btn-lg col-md-1" style="color:black">消息</a>
+        <div class="col-md-3 col-md-offset-3">
+            <form action="##" class="navbar-form " rol="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入关键词"/>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+    </div>
+    <div class=" panel-body row" style="padding:0">
+        <ul class="list-unstyled">
+            <li class="col-md-2">
+                <div>
+                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:15px">
+                        <li class="active"><a href="##" style="background:#EEEEEE ;color:black">全部功能</a></li>
+                        <li><a href="/personal_Order">我的订单</a></li>
+                        <li><a href="/personal_Evaluation">我的评价</a></li>
+                        <li><a href="personal_Favorites">我的收藏</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-md-10">
+                <div class="panel panel-default col-md-11">
+                    <button type="button" class="btn btn-link btn-lg btn_OrderStatus" value="ORDER_ALL"><h5>所有订单</h5>
+                    </button>
+                    <button type="button" class="btn btn-link btn-lg btn_OrderStatus" value="ORDER_PAY"><h5>待发货</h5>
+                    </button>
+                    <button type="button" class="btn btn-link btn-lg btn_OrderStatus" value="ORDER_SENDOUT"><h5>待收货</h5>
+                    </button>
+                </div>
+                <form action="##" class="navbar-form " rol="search">
+                    <div class="form-group">
+                        <input id="txt_orderId" type="text" class="form-control" placeholder="请输入订单号"/>
+                    </div>
+                    <!-- 修改 -->
+                    <button type="button" class="btn btn-danger" onclick="searchOrderById()">订单搜索</button>
+                </form>
+                <div class="panel panel-default col-md-11">
+                    <div class="panel panel-heading row text-center">
+                        <ul class="list-unstyled">
+                            <li class="col-md-3">
+                                <h5>商品</h5>
+                            </li>
+                            <li class="col-md-2">
+                                <h5>单价</h5>
+                            </li>
+                            <li class="col-md-2">
+                                <h5>商品操作</h5>
+                            </li>
+                            <li class="col-md-1">
+                                <h5>实付款</h5>
+                            </li>
+                            <li class="col-md-2">
+                                <h5>交易状态</h5>
+                            </li>
+                            <li class="col-md-2">
+                                <h5>交易操作</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" panel-body row text-center" id="order_body">
+                    </div>
+                    <div class=" panel-footer row">
+                        <div class="col-md-4 col-md-offset-8">
+                            <ul class="pagination ">
+                                <li><a class="col-md-offset-8" href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">8</a></li>
+                                <li><a href="#">&raquo;</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class=" panel-footer row">
+        <div class="col-md-12">
+            <div class="col-md-1 col-md-offset-4 text-center">
+                <ul class="list-unstyled">
+                    <li><label>关于惠Go网</label>
+                    <li>
+                        <button class="btn btn-link" type="button">帮助中心</button>
+                    <li>
+                        <button class="btn btn-link" type="button">诚聘英才</button>
+                    <li>
+                        <button class="btn btn-link" type="button">法律声明</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>买家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线答疑</button>
+                    <li>
+                        <button class="btn btn-link" type="button">服务保障</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>卖家中心</label>
+                    <li>
+                        <button class="btn btn-link" type="button">在线咨询</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商品报名</button>
+                    <li>
+                        <button class="btn btn-link" type="button">商家规则</button>
+                    <li>
+                        <button class="btn btn-link" type="button">规则通知</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>有话要说</label>
+                    <li>
+                        <button class="btn btn-link" type="button">客服热线</button>
+                    <li>
+                        <button class="btn btn-link" type="button">廉政举报</button>
+                    <li>
+                        <button class="btn btn-link" type="button">我要投诉</button>
+                </ul>
+            </div>
+            <div class="col-md-1 text-center">
+                <ul class="list-unstyled">
+                    <li><label>服务保障</label>
+                    <li>
+                        <button class="btn btn-link" type="button">七天无理由退换货</button>
+                    <li>
+                        <button class="btn btn-link" type="button">维修/保养</button>
+                    <li>
+                        <button class="btn btn-link" type="button">购买延保服务</button>
+                    <li>
+                        <button class="btn btn-link" type="button">退换货政策</button>
+                </ul>
+            </div>
+        </div>
+        <p>&nbsp;
+        <p>&nbsp;
+            <div class="col-md-12">
+                <div class="row text-center">
+                    <a>关于网站</a>&nbsp;
+                    <a>帮助中心</a>&nbsp;
+                    <a>开放平台</a>&nbsp;
+                    <a>招聘信息</a>&nbsp;
+                    <a>联系我们</a>&nbsp;
+                    <a>网站合作</a>&nbsp;
+                    <a>法律声明及隐私权政策</a>&nbsp;
+                    <a>知识产权</a>&nbsp;
+                    <a>廉政举报</a>&nbsp;
+                </div>
+        <p>&nbsp;
+        <div class="row text-center">
+            <label>增值电信业务经营许可证：xxx-xxxx</label>
+            <label>网络文化经营许可证：xxx-xxxx</label>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade " id="myModal_evaluation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_evalaution"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel_evalaution">评论</h4>
+            </div>
+            <div class="modal-body">
+                <h4>评论内容：</h4>
+                <textarea rows="5" cols="" class="form-control" id="txt_evaluation"></textarea>
+                <select id="select_score">
+                    <option value="5">--请评分--</option>
+                    <option value="5">5分</option>
+                    <option value="4">4分</option>
+                    <option value="3">3分</option>
+                    <option value="2">2分</option>
+                    <option value="1">1分</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_closeEvaluation">关闭</button>
+                <button type="button" class="btn btn-primary" id="btn_submit" data-dismiss="modal"
+                        onclick="submitEvaluation()">提交评论
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    var userId;
+    var status = 'ORDER_ALL';
+    var page = 1;
+    var pageSize = 4;
+    var goodId;
+    //新增
+    var userAccount;
+
+    //新增
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    function getLocalTime(timestamp) {
+        Date.prototype.toLocaleString = function () {
+            return this.getFullYear() + "年" + (this.getMonth() + 1) + "月" + this.getDate() + "日 " + this.getHours() + "点" + this.getMinutes() + "分";
+        };
+        return new Date(timestamp).toLocaleString();
+    }
+
+    //修改
+    function getOrder(UserId, Status, Page, PageSize) {
+        $("#order_body").empty();
+        $.ajax({
+            type: "POST", //方法类型
+            url: "user/get_Order",//请求地址
+            dataType: "text",
+            data: {
+                "userId": UserId,
+                "status": Status,
+                "page": Page,
+                "pageSize": PageSize
+            },
+            success: function (data) {
+                var response = eval(data);
+                for (var i = 0; i < response.length; i++) {
+                    $("#order_body").append('<ul class="list-unstyled"><li class="col-md-12"><ul class="list-unstyled" style="border:3px solid black"> <li class="col-md-3"><label>' + getLocalTime(response[i].gmtCreate) + '&nbsp;  订单号： ' + response[i].id + '</label> </li><li class="col-md-1"> <label></label></li><li class="col-md-1"></li><li class="col-md-2">联系卖家</li><li class="col-md-1"></li><li class="col-md-2"></li><li class="col-md-2"></li></ul></li><li class="col-md-12 "><ul class="list-unstyled "  style="border:1px solid black;">  <li class="col-md-3 "> <img class="col-md-3 img_OrderEvaluation" src="" style="margin-top:5px;height: 88%; width: 44%"><label class="col-md-6">' + response[i].name + '</label> </li><li class="col-md-2"><ul class="list-unstyled"><li><label>原价:<s>￥' + response[i].originalPrice + '</s></label><li><label>团购价: ￥' + response[i].preferentialPrice + '</label></ul></li><li class="col-md-2">' + response[i].telephone + '</li><li class="col-md-1"><label>￥' + response[i].payPrice + '</label></li><li class="col-md-2"><ul class="list-unstyled"><li><label>' + response[i].status + '</label><li></ul></li><li class="col-md-2"><button class="btn btn-link btn_OrderEvaluation" type="button" data-toggle="modal" data-target="#myModal_evaluation" >发表评论</button></li></ul></li></ul>');
+                    $(".btn_OrderEvaluation").not("[id]").attr("id", "evaluation_" + i);
+                    $(".img_OrderEvaluation").not("[id]").attr("id", "img_" + response[i].id);
+                    $("#evaluation_" + i + "").attr("value", "" + response[i].goodId);
+                    $("#img_" + response[i].id + "").attr("src", "" + response[i].picture);
+                    //新增
+                    $("#evaluation_" + i + "").attr("id", "" + response[i].status);
+                }
+            },
+            error: function () {
+                alert("获取订单失败");
+            }
+        });
+    }
+
+    //修改
+    $(function () {
+        //新增
+        userAccount = getCookie("account");
+        $.ajax({
+            type: "GET", //方法类型
+            url: "user/info/" + userAccount + "",//请求地址
+            dataType: "json", //数据类型
+            success: function (data) {
+                $("#Hello").html("Hi，" + data.nickName);
+                userId = data.id;
+                getOrder(userId, status, page, pageSize);
+            }
+        });
+    });
+
+    $(".btn_OrderStatus").click(function () {
+        status = $(this).val();
+        page = 1;
+        getOrder(userId, status, page, pageSize);
+    });
+
+    //修改
+    $(document).on("click", ".btn_OrderEvaluation", function () {
+        goodId = $(this).attr("value");
+        //新增
+        status = $(this).attr("id");
+    });
+
+    //修改
+    function submitEvaluation() {
+        var content = $("#txt_evaluation").val();
+        var score = $("#select_score").find("option:selected").val();
+        //新增*
+        if (status == "交易成功") {
+            $.ajax({
+                type: "POST", //方法类型
+                url: "user/add_evaluation",//请求地址
+                dataType: "text", //数据类型
+                data: {
+                    "goodId": goodId,
+                    "userId": userId,
+                    "score": score,
+                    "content": content
+                },
+                success: function () {
+                    alert("评论成功");
+                    $("#txt_evaluation").val("");
+                    $("#select_score").val("5");
+                },
+                error: function () {
+                    alert("评论失败");
+                    $("#txt_evaluation").val("");
+                    $("#select_score").val("5");
+                }
+            });
+        }
+        else {
+            alert("订单未交易完成，禁止评价");
+            $("#txt_evaluation").val("");
+            $("#select_score").val("5");
+            $("#btn_closeEvaluation").click();
+        }
+        //*新增
+    }
+
+    //修改
+    function searchOrderById() {
+        var orderId = $("#txt_orderId").val();
+        $.ajax({
+            type: "GET", //方法类型
+            url: "user/search_orderById/" + orderId,//请求地址
+
+            data: {
+                "userId": userId
+            },
+            success: function (data) {
+                if (data != "") {
+                    $("#order_body").empty();
+                    $("#order_body").append('<ul class="list-unstyled"><li class="col-md-12"><ul class="list-unstyled" style="border:3px solid black"> <li class="col-md-3"><label>' + getLocalTime(data.gmtCreate) + '&nbsp;  订单号： ' + data.id + '</label> </li><li class="col-md-1"> <label></label></li><li class="col-md-1"></li><li class="col-md-2">联系卖家</li><li class="col-md-1"></li><li class="col-md-2"></li><li class="col-md-2"></li></ul></li><li class="col-md-12 "><ul class="list-unstyled "  style="border:1px solid black;">  <li class="col-md-3 "> <img class="col-md-3 img_OrderEvaluation" src="" style="margin-top:5px;height: 88%; width: 44%"><label class="col-md-6">' + data.name + '</label> </li><li class="col-md-2"><ul class="list-unstyled"><li><label>原价: <s>￥' + data.originalPrice + '</s></label><li><label>团购价:￥' + data.preferentialPrice + '</label></ul></li><li class="col-md-2">' + data.telephone + '</li><li class="col-md-1"><label>￥' + data.payPrice + '</label></li><li class="col-md-2"><ul class="list-unstyled"><li><label>' + data.status + '</label><li></ul></li><li class="col-md-2"><button class="btn btn-link btn_OrderEvaluation" type="button" data-toggle="modal" data-target="#myModal_evaluation" >发表评论</button></li></ul></li></ul>');
+                    $(".btn_OrderEvaluation").not("[id]").attr("id", "evaluation_" + data.id + "_One");
+                    $(".img_OrderEvaluation").not("[id]").attr("id", "OneImg_" + data.id + "");
+                    $("#evaluation_" + data.id + "_One").attr("value", "" + data.goodId);
+                    $("#OneImg_" + data.id + "").attr("src", "" + data.picture);
+                    $("#txt_orderId").val("");
+                    //新增
+                    $("#evaluation_" + data.id + "_One").attr("id", "" + data.status);
+                }
+                else {
+                    $("#order_body").empty();
+                    $("#txt_orderId").val("");
+                    alert("未找到搜索结果");
+                }
+            },
+            error: function () {
+                alert("搜索订单失败");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

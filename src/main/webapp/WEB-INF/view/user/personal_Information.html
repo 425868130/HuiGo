@@ -2,31 +2,34 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/style/mystyle.css" rel="stylesheet"/>
-    <title>个人信息</title>
+
+    <title>Insert title here</title>
 </head>
 <body>
-<div class="navbar navbar-default" role="navigation" style="padding-left:20px;margin-bottom:0px">
-    <div>
-        <label class="navbar-text navbar-left">hi，xx用户</label>
-        <button class="btn btn-link btn-lg navbar-left">消息（0）</button>
-        <button class="btn btn-link btn-lg navbar-right" style="margin-right:100px">联系客服</button>
-        <button class="btn btn-link btn-lg navbar-right">卖家中心</button>
-        <button class="btn btn-link btn-lg navbar-right">商品分类</button>
-        <button class="btn btn-link btn-lg navbar-right">收藏夹</button>
-        <button class="btn btn-link btn-lg navbar-right">个人中心</button>
-        <button class="btn btn-link btn-lg navbar-right">我的惠Go</button>
-        <button class="btn btn-link btn-lg navbar-right">惠Go网首页</button>
+<div class="navbar navbar-default " role="navigation" style="padding-left:20px;margin-bottom:0px">
+    <div class="flexbox">
+        <label class="navbar-text " id="Hello"></label>
+        <button class="btn btn-link btn-md">消息（0）</button>
+        <button class="btn btn-link btn-md col-md-1 col-md-offset-3" onclick="window.location.href='/index'">惠Go网首页
+        </button>
+        <button class="btn btn-link btn-md col-md-1">我的惠Go</button>
+        <button class="btn btn-link btn-md col-md-1">个人中心</button>
+        <button class="btn btn-link btn-md col-md-1">收藏夹</button>
+        <button class="btn btn-link btn-md col-md-1">商品分类</button>
+        <button class="btn btn-link btn-md col-md-1" onclick="window.location.href='/user/businessInfoManage'">卖家中心
+        </button>
+        <button class="btn btn-link btn-md col-md-1">联系客服</button>
     </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel panel-heading row flexbox">
+    <div class="panel panel-heading  flexbox" style="background:#FF0033 ">
         <h1 class="col-md-2  text-left">我的惠Go</h1>
-        <a href="/person" class="btn btn-link btn-lg col-md-1">首页</a>
-        <a href="##" class="btn btn-link btn-lg col-md-1">账户设置</a>
-        <a href="##" class="btn btn-link btn-lg col-md-1">消息</a>
+        <a href="/personal_Order" class="btn btn-link btn-lg col-md-1" style="color:black">订单管理</a>
+        <a href="/personal_Set" class="btn btn-link btn-lg col-md-1" style="color:black">账户设置</a>
+        <a href="##" class="btn btn-link btn-lg col-md-1" style="color:black">消息</a>
         <div class="col-md-3 col-md-offset-3">
             <form action="##" class="navbar-form " rol="search">
                 <div class="form-group">
@@ -36,69 +39,81 @@
             </form>
         </div>
     </div>
-    <div class="panel panel-body row" style="padding:0">
+    <div class=" panel-body row" style="padding:0">
         <ul class="list-unstyled">
             <li class="col-md-2">
                 <div class="panel panel-default ">
-                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:20px">
-                        <li><img src="http://img.mukewang.com/5434eba100014fe906000338.png"
-                                 style="margin-top:5px;height: 88%; width: 44%"></li>
-                        <li><h2>账户设置</h2></li>
-                        <li><a href="/person">安全设置</a></li>
+                    <ul class="nav nav-pills nav-stacked text-center" style="font-size:15px">
+                        <li><img id="myHeadPortrait" src="" style="margin-top:5px;height: 88%; width: 44%"></li>
+                        <li><h4>账户设置</h4></li>
+                        <li><a href="/personal_Set">安全设置</a></li>
                         <li><a href="/personal_Information">个人资料</a></li>
                         <li><a href="/personal_Address">收货地址</a></li>
-                        <li><a href="##">支付方式绑定设置</a></li>
                     </ul>
                 </div>
             </li>
             <li class="col-md-10">
-                <h2>个人资料</h2>
+                <h3>个人资料</h3>
                 <div class="panel panel-default col-md-9 col-md-offset-1">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="form_myHeadPortrait" enctype="multipart/form-data"
+                          method="post">
                         <div class="form-group row flexbox">
-                            <h2 class="col-md-2">当前头像：</h2>
-                            <img class="col-md-10" src="http://img.mukewang.com/5434eba100014fe906000338.png"
-                                 style="height: 22%; width: 25%">
+                            <h4 class="col-md-2">当前头像：</h4>
+                            <a class="col-md-2" href="##"><img id="myHeadPortraitPic" src=""
+                                                               style="height: 100%; width: 100%"></a>
                         </div>
                         <div class="form-group row flexbox">
-                            <h2 class="col-md-2">昵称：</h2>
-                            <input class="col-md-4 input-lg" type="text" id="inputNickName" value="陌生人">
+                            <input type="file" name="myHeadPortrait" id="id_myHeadPortrait" accept="image/*"
+                                   style="display:none">
+                            <div class="input-append col-md-offset-2">
+                                <input id="photoCover" class="input-sm" type="text" style="height:30px;" readonly>
+                                <a class="btn btn-primary" onclick="$('input[id=id_myHeadPortrait]').click();">选择头像</a>
+                            </div>
                         </div>
                         <div class="form-group row flexbox">
-                            <h2 class="col-md-2">真实姓名：</h2>
-                            <input class="col-md-3 input-lg" type="text" id="inputRelName" value="XXX">
+                            <button class="btn btn-md btn-primary col-md-offset-2" type="button"
+                                    onclick="modifyHeadPortrait()">保存头像
+                            </button>
+                            <input class="btn btn-md btn-primary" id="form_reset" type="reset" value="重置"
+                                   style="margin-left:5px;"/>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" role="form" id="form_personalInfo">
+                        <div class="form-group row flexbox">
+                            <h4 class="col-md-2">昵称：</h4>
+                            <input class="col-md-4 input-lg" type="text" id="inputNickName" name="inputNickName">
                         </div>
                         <div class="form-group row flexbox">
-                            <h2 class="col-md-2">性别：</h2>
+                            <h4 class="col-md-2">真实姓名：</h4>
+                            <input class="col-md-3 input-lg" type="text" id="inputRelName" name="inputRelName">
+                        </div>
+                        <div class="form-group row flexbox">
+                            <h4 class="col-md-2">性别：</h4>
                             <div class="radio col-md-2 row flexbox">
                                 <label class="col-md-2"><input type="radio" name="sexRadio" id="SexRadio1" value="true"></label>
-                                <h3 class="col-md-2">男</h3>
+                                <h5 class="col-md-1">男</h5>
                             </div>
                             <div class="radio col-md-2 row flexbox">
                                 <label class="col-md-2"><input type="radio" name="sexRadio" id="SexRadio2"
                                                                value="false"></label>
-                                <h3 class="col-md-2">女</h3>
+                                <h5 class="col-md-1">女</h5>
                             </div>
                         </div>
                         <div class="form-group row flexbox">
-                            <h2 class="col-md-2">生日：</h2>
-                            <div class="input-group date form_date col-md-3">
-                                <input name="startTm" id="datetimepicker" type='text' class="form-control input-sm"
-                                       readonly="readonly"/>
-                                <span class="input-group-addon input-sm">
-					                  <span class="glyphicon glyphicon-calendar"></span>  
-					                </span>
-                            </div>
+                            <h4 class="col-md-2">生日：</h4>
+                            <input type="date" id="inputBirthday" name="inputBirthday"/>
                         </div>
                         <div class="form-group">
-                            <input class=" btn-lg btn-primary col-md-1 col-md-offset-2" type="submit" value="提交">
+                            <button class="btn btn-md btn-primary col-md-1 col-md-offset-2" type="button"
+                                    onclick="modifyUserInfo()">提交
+                            </button>
                         </div>
                     </form>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="panel panel-footer row">
+    <div class=" panel-footer row">
         <div class="col-md-12">
             <div class="col-md-1 col-md-offset-4 text-center">
                 <ul class="list-unstyled">
@@ -181,22 +196,119 @@
 </div>
 </div>
 
-<script src="/js/jquery/jquery-3.1.1.min.js"></script>
-<script src="/js/bootstrap/bootstrap.js"></script>
-
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 <script type="text/javascript">
+
+    //新增
+    var userAccount;
+
+    //新增
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    //修改
+    $(function () {
+        userAccount = getCookie("account");
+        $.ajax({
+            type: "GET", //方法类型
+            url: "user/info/" + userAccount + "",//请求地址			//新增
+            dataType: "json", //数据类型
+            success: function (data) {
+                $("#Hello").html("Hi，" + data.nickName);
+                $("#myHeadPortrait").attr("src", data.headportrait);
+            }
+        });
+    });
+
+    //修改
     $(function () {
         $.ajax({
             type: "GET", //方法类型
-            url: "user/info/xjw",//请求地址
+            url: "user/info/" + userAccount + "",//请求地址		//新增
             dataType: "json", //数据类型
             success: function (data) {
                 $("#inputNickName").val(data.nickName);
                 $("#inputRelName").val(data.relname);
                 $("input[name=sexRadio][value=" + data.sex + "]").attr("checked", true);
+                $("#myHeadPortraitPic").attr("src", data.headportrait);
+                $("#inputBirthday").val(data.birthday);
             }
         });
     });
+
+    //图片路径显示
+    $(function () {
+        $('input[id=id_myHeadPortrait]').change(function () {
+            $('#photoCover').val($(this).val());
+        });
+    });
+
+    //生日日期选择器
+    $(function () {
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii",
+            autoclose: true,
+            todayBtn: true,
+            startDate: "2013-02-14 10:00",
+            minuteStep: 10
+        });
+    });
+
+    //修改
+    function modifyHeadPortrait() {
+        var val = $.trim($("#id_myHeadPortrait").val());
+        if (val.length < 7)
+            alert("未选择头像");
+        else {
+            $.ajax({
+                url: "user/modify_HeadPortrait/" + userAccount + "",//新增
+                type: "POST",
+                data: new FormData($("#form_myHeadPortrait")[0]),
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("#myHeadPortraitPic").attr("src", data.headportrait);
+                    $("#form_reset").click();
+                },
+                error: function () {
+                    alert("保存头像失败");
+                }
+            });
+        }
+    }
+
+    //修改
+    function modifyUserInfo() {
+        $.ajax({
+            url: "user/modify_info/" + userAccount + "",//新增
+            type: "POST",
+            data: $("#form_personalInfo").serialize(),
+            success: function (data) {
+                $("#inputNickName").val(data.nickName);
+                $("#Hello").html("Hi，" + data.nickName);
+                $("#inputRelName").val(data.relname);
+                $("input[name=sexRadio][value=" + data.sex + "]").attr("checked", true);
+                $("#inputBirthday").val(data.birthday);
+                alert("修改成功");
+            },
+            error: function () {
+                alert("修改失败");
+            }
+        });
+    }
 </script>
 
 </body>

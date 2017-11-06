@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <!--如果页面需要响应式效果则此处的声明不可少-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <!-- 引入Vue -->
-    <link rel="stylesheet" type="text/css" href="/js/iview/styles/iview.css">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://benefit-go.oss-cn-hangzhou.aliyuncs.com/webRes/img/favicon.ico"/>
+    <link href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" rel="stylesheet">
     <style>
         h1 {
             color: #CC0033;
@@ -39,7 +39,7 @@
     <row class="head-band">
         <row>
             <i-col :lg="{span:1,offset:2}" :xs="{span:6,offset:1}">
-                <a :href="url.router.index"><img src="/img/logo.png" class="logoPic"/></a>
+                <a :href="url.router.index"><img :src="url.res.logoPic" class="logoPic"/></a>
             </i-col>
             <i-col :lg="{span:5}" :xs="{span:16,offset:1}">
                 <h1>会员注册</h1>
@@ -91,9 +91,10 @@
     <my-footer></my-footer>
 </div>
 
-<script type="text/javascript" src="/js/vue/vue.js"></script>
-<script type="text/javascript" src="/js/iview/iview.js"></script>
-<script type="text/javascript" src="/js/axios/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
+
 <script type="text/javascript" src="/js/project/webRouter.js"></script>
 <script type="text/javascript" src="/js/project/footer.js"></script>
 <script type="text/javascript" src="/js/project/vipReg.js"></script>

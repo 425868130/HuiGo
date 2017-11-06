@@ -41,6 +41,7 @@ public class ReceivingAddress implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;
@@ -104,7 +105,7 @@ public class ReceivingAddress implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ReceivingAddress)) return false;
 
         ReceivingAddress that = (ReceivingAddress) o;
 
@@ -113,9 +114,7 @@ public class ReceivingAddress implements Serializable {
         if (tel != null ? !tel.equals(that.tel) : that.tel != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (gmtCreate != null ? !gmtCreate.equals(that.gmtCreate) : that.gmtCreate != null) return false;
-        if (gmtModify != null ? !gmtModify.equals(that.gmtModify) : that.gmtModify != null) return false;
-
-        return true;
+        return gmtModify != null ? gmtModify.equals(that.gmtModify) : that.gmtModify == null;
     }
 
     @Override

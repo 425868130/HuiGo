@@ -26,7 +26,7 @@ public class Order implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    private long id;
+    private Long id;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     /*下订单的用户*/
@@ -35,6 +35,8 @@ public class Order implements Serializable {
     private Goods goods;
     /*订单关联的快递方式*/
     private ExpressDelivery expressDelivery;
+    /*订单收货地址*/
+    private ReceivingAddress receivingAddress;
     /*订单金额*/
     private BigDecimal price;
     /*支付方式*/
@@ -44,6 +46,16 @@ public class Order implements Serializable {
     private String remark;
     /*订单关联的售后记录表*/
     private Set<AfterSale> afterSales = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "addressid")
+    public ReceivingAddress getReceivingAddress() {
+        return receivingAddress;
+    }
+
+    public void setReceivingAddress(ReceivingAddress receivingAddress) {
+        this.receivingAddress = receivingAddress;
+    }
 
     @ManyToOne
     @JoinColumn(name = "expressid")
@@ -86,12 +98,13 @@ public class Order implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -158,18 +171,15 @@ public class Order implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Order)) return false;
 
         Order order = (Order) o;
 
-        if (id != order.id) return false;
+        if (id != null ? !id.equals(order.id) : order.id != null) return false;
         if (gmtCreate != null ? !gmtCreate.equals(order.gmtCreate) : order.gmtCreate != null) return false;
         if (gmtModified != null ? !gmtModified.equals(order.gmtModified) : order.gmtModified != null) return false;
-        if (user != null ? !user.equals(order.user) : order.user != null) return false;
-        if (goods != null ? !goods.equals(order.goods) : order.goods != null) return false;
-        if (expressDelivery != null ? !expressDelivery.equals(order.expressDelivery) : order.expressDelivery != null)
-            return false;
         if (price != null ? !price.equals(order.price) : order.price != null) return false;
+        if (payMethod != null ? !payMethod.equals(order.payMethod) : order.payMethod != null) return false;
         if (orderStatus != null ? !orderStatus.equals(order.orderStatus) : order.orderStatus != null) return false;
         if (remark != null ? !remark.equals(order.remark) : order.remark != null) return false;
         return afterSales != null ? afterSales.equals(order.afterSales) : order.afterSales == null;
@@ -177,13 +187,11 @@ public class Order implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
         result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (goods != null ? goods.hashCode() : 0);
-        result = 31 * result + (expressDelivery != null ? expressDelivery.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (payMethod != null ? payMethod.hashCode() : 0);
         result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
         result = 31 * result + (afterSales != null ? afterSales.hashCode() : 0);

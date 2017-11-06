@@ -17,7 +17,7 @@ public interface ParticipateGroupDao extends BaseDao<ParticipateGroup, Long> {
     public void createParticipateGroup(Long userid, Long groupid);
 
     /**
-     * 根据用户id和团购活动id，设置参团记录无效
+     * 根据用户id和团购活动id，设置参团记录
      */
     public void removeParticipateGroup(Long userid, Long groupid);
 

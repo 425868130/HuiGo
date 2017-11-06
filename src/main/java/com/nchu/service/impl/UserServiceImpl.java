@@ -271,4 +271,15 @@ public class UserServiceImpl implements UserService {
         conditions.put("islocked", 1);
         return userDao.searchPage(conditions, page, pageSize);
     }
+
+    @Override
+    public List<User> listUserByStatus(Boolean isLocked, String userType) {
+        String hql;
+        if (isLocked) {
+            hql = "from User where islocked = 1 and role = '" + userType + "'";
+        } else {
+            hql = "from User where islocked = 0 and role = '" + userType + "'";
+        }
+        return userDao.searchListDefined(hql);
+    }
 }
